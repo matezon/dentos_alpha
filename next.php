@@ -1,0 +1,102 @@
+<?php
+?>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>読み込み中</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .progress-container {
+            width: 300px;
+            height: 25px;
+            background-color: #ddd;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: #28a745;
+            transition: width 0.2s;
+        }
+
+        #complete {
+            display: none;
+            text-align: center;
+        }
+
+        .next-button {
+            margin-top: 15px;
+            padding: 10px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loading">
+        <h2>データを読み込んでいます...</h2>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="bar"></div>
+        </div>
+
+        <div id="percent">0%</div>
+    </div>
+
+    <div id="complete">
+        <h2>読み込み完了！</h2>
+        <button class="next-button" onclick="goNext()">次へ進む</button>
+    </div>
+
+    <script>
+        let progress = 0;
+        const bar = document.getElementById("bar");
+        const percent = document.getElementById("percent");
+
+        const interval = setInterval(() => {
+            progress += Math.floor(Math.random() * 10) + 1; // ランダムで進む
+
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+
+                // 表示切り替え
+                document.getElementById("loading").style.display = "none";
+                document.getElementById("complete").style.display = "block";
+            }
+
+            bar.style.width = progress + "%";
+            percent.textContent = progress + "%";
+
+        }, 300);
+
+        function goNext() {
+            window.location.href = "login.php";
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,348 @@
+<?php ?>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ダッシュボード</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* 左 */
+.left {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px;
+    flex-shrink: 0; 
+}
+
+.left-inner {
+    width: calc(3 * 270px + 2 * 10px);
+}
+
+/* 右 */
+.right {
+    flex: 1;
+    padding: 10px;
+    background: #fff;
+    border-left: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* カード */
+.card {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    margin-bottom: 15px; 
+}
+
+/* タイトル */
+.section-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+/* スタッフ */
+.staff-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 270px);
+    gap: 10px;
+}
+
+.chart-wrapper {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: auto;
+}
+
+.chart-wrapper canvas {
+    width: 180px !important;
+    height: 180px !important;
+}
+
+.center-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #007BFF;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* KPI */
+.kpi-row {
+    display: flex;
+    gap: 10px;
+}
+
+.kpi-box {
+    flex: 1;
+    text-align: center;
+}
+
+.kpi-canvas {
+    width: 140px;
+    height: 140px;
+    margin: auto;
+}
+
+.kpi-canvas canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* ★ 主要評価項目の高さ追加 */
+#bar {
+    width: 100% !important;
+    height: 220px !important;
+}
+
+/* 下グラフ */
+.big-chart {
+    width: 100%;
+    height: 240px;
+    margin-top: 15px;
+}
+
+.big-chart canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.bubble {
+    background: #e3f2fd;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.chart-inner {
+    width: 75%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.chart-inner canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.improvement-list {
+    font-size: 12px;
+    padding-left: 18px;
+    line-height: 1.6;
+}
+
+.improvement-card {
+    border-left: 4px solid #ff9800;
+    margin-top: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- 左 -->
+<div class="left">
+<div class="left-inner">
+
+<div class="card">
+<div class="section-title">スタッフ成果</div>
+<div class="staff-grid">
+<div><div class="chart-wrapper"><canvas id="a"></canvas><div class="center-icon">A</div></div></div>
+<div><div class="chart-wrapper"><canvas id="b"></canvas><div class="center-icon">B</div></div></div>
+<div><div class="chart-wrapper"><canvas id="c"></canvas><div class="center-icon">C</div></div></div>
+<div><div class="chart-wrapper"><canvas id="d"></canvas><div class="center-icon">D</div></div></div>
+</div>
+</div>
+
+<div class="card">
+<div class="section-title">主要評価項目</div>
+<canvas id="bar"></canvas>
+</div>
+
+</div>
+</div>
+
+<!-- 右 -->
+<div class="right">
+
+<div class="card">
+
+<div class="bubble">
+今日も患者満足度の向上を意識して診療に取り組みましょう。
+</div>
+
+<div class="kpi-row">
+
+<div class="kpi-box">
+<div>自費診療比率</div>
+<div class="kpi-canvas">
+<canvas id="kpi1"></canvas>
+</div>
+</div>
+
+<div class="kpi-box">
+<div>リコール率</div>
+<div class="kpi-canvas">
+<canvas id="kpi2"></canvas>
+</div>
+</div>
+
+</div>
+
+<div class="big-chart">
+<div>患者来院数（新規 vs 既存）</div>
+<div class="chart-inner">
+<canvas id="visit"></canvas>
+</div>
+</div>
+
+<div class="big-chart">
+<div>日別 保険 / 自費</div>
+<div class="chart-inner">
+<canvas id="finance"></canvas>
+</div>
+</div>
+
+</div>
+
+<div class="card improvement-card">
+<div class="section-title">今後の改善点</div>
+<ul class="improvement-list">
+<li>自費診療比率の向上（＋10%目標）</li>
+<li>リコール率の安定化</li>
+<li>新患数の増加施策</li>
+<li>スタッフ間の成果バラつき改善</li>
+</ul>
+</div>
+
+</div>
+</div>
+
+<script>
+
+/* スタッフ */
+["a","b","c","d"].forEach((id,i)=>{
+const vals=[80,65,90,55];
+new Chart(document.getElementById(id),{
+type:'doughnut',
+data:{datasets:[{data:[vals[i],100-vals[i]],backgroundColor:['#28a745','#e0e0e0']}]},
+options:{cutout:'70%',plugins:{legend:{display:false}}}
+});
+});
+
+/* KPI */
+function kpi(id,val,color){
+new Chart(document.getElementById(id),{
+type:'doughnut',
+data:{datasets:[{data:[val,100-val],backgroundColor:[color,'#e0e0e0']}]},
+options:{cutout:'70%',plugins:{legend:{display:false}}}
+});
+}
+kpi("kpi1",42,"#007BFF");
+kpi("kpi2",78,"#28a745");
+
+/* ★ 主要評価項目（追加） */
+new Chart(document.getElementById("bar"),{
+type:'bar',
+data:{
+labels:[
+'患者満足度',
+'リコール率',
+'コミュニケーション',
+'IC完了率'
+],
+datasets:[{
+data:[85,78,82,90],
+backgroundColor:[
+'#4caf50',
+'#ff9800',
+'#03a9f4',
+'#9c27b0'
+]
+}]
+},
+options:{
+responsive:true,
+maintainAspectRatio:false,
+scales:{
+y:{
+beginAtZero:true,
+max:100
+}
+},
+plugins:{
+legend:{display:false}
+}
+}
+});
+
+/* 来院 */
+new Chart(document.getElementById("visit"),{
+type:'bar',
+data:{
+labels:['新規','既存'],
+datasets:[{
+data:[320,925],
+backgroundColor:['#ff9800','#03a9f4']
+}]
+},
+options:{
+responsive:true,
+maintainAspectRatio:false,
+scales:{y:{beginAtZero:true}},
+layout:{padding:{bottom:20}}
+}
+});
+
+/* 保険 / 自費 */
+new Chart(document.getElementById("finance"),{
+type:'bar',
+data:{
+labels:['月','火','水','木','金','土'],
+datasets:[
+{label:'保険',data:[120,140,110,130,150,160],backgroundColor:'#4caf50'},
+{label:'自費',data:[40,50,35,60,55,70],backgroundColor:'#ff5722'}
+]
+},
+options:{
+responsive:true,
+maintainAspectRatio:false,
+scales:{y:{beginAtZero:true}},
+plugins:{legend:{position:'top'}},
+layout:{padding:{bottom:20}}
+}
+});
+
+</script>
+
+</body>
+</html>

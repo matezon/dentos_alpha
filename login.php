@@ -1,0 +1,72 @@
+<?php
+// ダミーなのでサーバー側チェックなし
+?>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ログイン</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>ログイン</h2>
+
+    <form onsubmit="return fakeLogin();">
+        <input type="text" placeholder="ユーザー名" required>
+        <input type="password" placeholder="パスワード" required>
+        <button type="submit">ログイン</button>
+    </form>
+</div>
+
+<script>
+function fakeLogin() {
+    // 何を入力しても通す
+    window.location.href = "dashboard.php";
+    return false;
+}
+</script>
+
+</body>
+</html>
