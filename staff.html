@@ -100,11 +100,91 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
+
+/* 全体 */
+#loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(4px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+/* 横並び */
+.loading-content {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+/* 画像 */
+.loading-image {
+    width: 120px; /* 好きに調整OK */
+}
+
+/* メインテキスト */
+.loading-text {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+/* サブ */
+.loading-sub {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #666;
+}
+
+/* バー */
+.progress-bar {
+    width: 500px;
+    height: 16px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* 進捗 */
+.progress {
+    height: 100%;
+    width: 0%;
+    background: #007BFF;
+    transition: width 0.2s;
+}
 </style>
 </head>
 
 <body>
+<div id="loadingOverlay">
+    <div class="loading-box">
 
+        <div class="loading-content">
+            <!-- 左：画像 -->
+            <img src="ss.png" class="loading-image">
+
+            <!-- 右：テキスト＆バー -->
+            <div>
+                <p class="loading-text">Now Analyzing...</p>
+
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+
+                <p class="loading-sub">Analyzing Document Data...</p>
+            </div>
+        </div>
+
+    </div>
+</div>
 <!-- サイドバー -->
 <div class="sidebar">
     <div class="menu">
@@ -182,6 +262,32 @@ function logout(){
     localStorage.removeItem("role");
     window.location.href = "login.html";
 }
+
+document.getElementById("userBtn").addEventListener("click", () => {
+    window.location.href = "staff-list.html";
+});
+
+window.addEventListener("load", () => {
+    const bar = document.querySelector(".progress");
+    let width = 0;
+
+    const interval = setInterval(() => {
+        width += Math.random() * 10;
+
+        if (width >= 100) {
+            width = 100;
+            bar.style.width = width + "%";
+            clearInterval(interval);
+
+            setTimeout(() => {
+                document.getElementById("loadingOverlay").style.display = "none";
+            }, 300);
+        } else {
+            bar.style.width = width + "%";
+        }
+
+    }, 500);
+});
 </script>
 
 </body>
