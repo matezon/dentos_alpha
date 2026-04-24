@@ -16,7 +16,7 @@ body {
     display: flex;
     height: 100vh;
     margin-left: 60px;
-    margin-top: 60px;
+    margin-top: 70px;
 }
 
 /* 左 */
@@ -299,8 +299,7 @@ body {
     top: 0;
     left: 60px; /* サイドバー分ずらす */
     right: 0;
-    height: 60px;
-
+    height: 70px;
     background: white;
     border-bottom: 1px solid #ddd;
 
@@ -312,6 +311,20 @@ body {
     font-weight: bold;
 
     z-index: 1000;
+}
+
+/* タイトル全体 */
+.header-title {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 英語サブタイトル */
+.header-sub {
+    font-size: 10px;
+    color: #888;
+    margin-top: 2px;
+    letter-spacing: 1px;
 }
 </style>
 </head>
@@ -350,9 +363,16 @@ body {
     </div>
     </div>
 </div>
+
 <div class="header">
-    歯科医院経営ダッシュボード
+    <div class="header-title">
+        歯科医院経営ダッシュボード
+        <div class="header-sub">
+            DENTAL CLINIC WORKING DASHBOARD
+        </div>
+    </div>
 </div>
+
 <div class="container">
 
 <!-- 左 -->

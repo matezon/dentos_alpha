@@ -74,6 +74,7 @@ body {
 .container {
     margin-left: 60px;
     padding: 20px;
+    margin-top: 70px;
 }
 
 /* カード */
@@ -122,6 +123,40 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 60px;
+    right: 0;
+    height: 70px;
+
+    background: white;
+    border-bottom: 1px solid #ddd;
+
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    z-index: 1000;
+}
+
+/* タイトル全体 */
+.header-title {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 英語サブタイトル */
+.header-sub {
+    font-size: 10px;
+    color: #888;
+    margin-top: 2px;
+    letter-spacing: 1px;
+}
 </style>
 </head>
 
@@ -138,6 +173,15 @@ body {
         <button onclick="logout()">ログアウト</button>
     </div>
 </div>
+    </div>
+</div>
+
+<div class="header">
+    <div class="header-title">
+        歯科医院経営ダッシュボード
+        <div class="header-sub">
+            DENTAL CLINIC MANAGEMENT DASHBOARD
+        </div>
     </div>
 </div>
 
