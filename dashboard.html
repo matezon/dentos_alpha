@@ -237,7 +237,7 @@ body {
 <div class="sidebar">
     <div class="menu">
         <div class="menu-item active">🏠</div>
-        <div class="menu-item">👤</div>
+        <div class="menu-item" id="userBtn">👤</div>
         <div class="menu-item" id="settingsWrap">
     ⚙️
     <div class="settings-panel" id="settingsPanel">
@@ -453,6 +453,10 @@ function logout(){
     localStorage.removeItem("role");
     window.location.href = "login.html";
 }
+
+document.getElementById("userBtn").addEventListener("click", () => {
+    window.location.href = "staff-list.html";
+});
 </script>
 
 </body>
