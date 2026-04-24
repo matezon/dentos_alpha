@@ -257,14 +257,14 @@ body {
 /* テキスト */
 .loading-text {
     margin-bottom: 10px;
-    font-size: 14px;
+    font-size: 42px;
     color: #333;
 }
 
 /* バー */
 .progress-bar {
-    width: 200px;
-    height: 6px;
+    width: 600px;
+    height: 18px;
     background: #e0e0e0;
     border-radius: 5px;
     overflow: hidden;
@@ -518,7 +518,7 @@ window.addEventListener("load", () => {
     let width = 0;
 
     const interval = setInterval(() => {
-        width += Math.random() * 15;
+        width += Math.random() * 10;
 
         if (width >= 100) {
             width = 100;
@@ -532,7 +532,7 @@ window.addEventListener("load", () => {
             bar.style.width = width + "%";
         }
 
-    }, 200);
+    }, 1000);
 });
 </script>
 
