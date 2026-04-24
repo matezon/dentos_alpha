@@ -231,7 +231,7 @@ body {
     cursor: pointer;
 }
 
-/* オーバーレイ */
+/* 全体 */
 #loadingOverlay {
     position: fixed;
     top: 0;
@@ -239,7 +239,7 @@ body {
     width: 100%;
     height: 100%;
 
-    background: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.8);
     backdrop-filter: blur(4px);
 
     display: flex;
@@ -249,24 +249,37 @@ body {
     z-index: 9999;
 }
 
-/* 中央ボックス */
-.loading-box {
-    text-align: center;
+/* 横並び */
+.loading-content {
+    display: flex;
+    align-items: center;
+    gap: 30px;
 }
 
-/* テキスト */
+/* 画像 */
+.loading-image {
+    width: 120px; /* 好きに調整OK */
+}
+
+/* メインテキスト */
 .loading-text {
-    margin-bottom: 10px;
-    font-size: 42px;
-    color: #333;
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+/* サブ */
+.loading-sub {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #666;
 }
 
 /* バー */
 .progress-bar {
-    width: 600px;
-    height: 18px;
+    width: 500px;
+    height: 16px;
     background: #e0e0e0;
-    border-radius: 5px;
+    border-radius: 10px;
     overflow: hidden;
 }
 
@@ -283,10 +296,23 @@ body {
 <body>
 <div id="loadingOverlay">
     <div class="loading-box">
-        <p class="loading-text">読み込んでいます…</p>
-        <div class="progress-bar">
-            <div class="progress"></div>
+
+        <div class="loading-content">
+            <!-- 左：画像 -->
+            <img src="ss.png" class="loading-image">
+
+            <!-- 右：テキスト＆バー -->
+            <div>
+                <p class="loading-text">Now Analyzing...</p>
+
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+
+                <p class="loading-sub">Analyzing Document Data...</p>
+            </div>
         </div>
+
     </div>
 </div>
 <div class="sidebar">
