@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>スタッフ画面</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f4f6f8;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>スタッフ画面</h2>
+    <p>ここはスタッフ専用ページです</p>
+
+    <button onclick="logout()">ログアウト</button>
+</div>
+
+<script>
+// ログインチェック
+const role = localStorage.getItem("role");
+
+if (role !== "staff") {
+    alert("権限がありません");
+    window.location.href = "login.html";
+}
+
+function logout(){
+    localStorage.removeItem("role");
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>

@@ -61,14 +61,16 @@
 function fakeLogin() {
     const username = document.querySelector('input[type="text"]').value;
 
-    if (username === "president" || username === "staff") {
-
-        // ログイン情報保存（簡易）
-        localStorage.setItem("role", username);
-
+    if (username === "president") {
+        localStorage.setItem("role", "president");
         window.location.href = "dashboard.html";
+
+    } else if (username === "staff") {
+        localStorage.setItem("role", "staff");
+        window.location.href = "staff.html";
+
     } else {
-        alert("ログインできませんでした");
+        alert("ログインできません（president / staff のみ）");
     }
 
     return false;
