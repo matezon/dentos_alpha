@@ -240,19 +240,34 @@ body {
     height: 100%;
 
     background: rgba(255,255,255,0.7);
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(4px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     z-index: 9999;
 }
 
-/* バーの枠 */
+/* 中央ボックス */
+.loading-box {
+    text-align: center;
+}
+
+/* テキスト */
+.loading-text {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* バー */
 .progress-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
+    width: 200px;
+    height: 6px;
     background: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 /* 進捗 */
@@ -267,8 +282,11 @@ body {
 
 <body>
 <div id="loadingOverlay">
-    <div class="progress-bar">
-        <div class="progress"></div>
+    <div class="loading-box">
+        <p class="loading-text">読み込んでいます…</p>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
     </div>
 </div>
 <div class="sidebar">
@@ -500,15 +518,13 @@ window.addEventListener("load", () => {
     let width = 0;
 
     const interval = setInterval(() => {
-        width += Math.random() * 20; // ランダムで進む（リアルっぽい）
+        width += Math.random() * 15;
 
         if (width >= 100) {
             width = 100;
             bar.style.width = width + "%";
-
             clearInterval(interval);
 
-            // 少し待ってから消す
             setTimeout(() => {
                 document.getElementById("loadingOverlay").style.display = "none";
             }, 300);
