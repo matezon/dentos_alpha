@@ -81,7 +81,12 @@ body {
     <div class="menu">
         <div class="menu-item" id="homeBtn">🏠</div>
         <div class="menu-item active">👤</div>
-        <div class="menu-item">⚙️</div>
+        <div class="menu-item" id="settingsWrap">
+    ⚙️
+    <div class="settings-panel" id="settingsPanel">
+        <button onclick="logout()">ログアウト</button>
+    </div>
+</div>
     </div>
 </div>
 
@@ -104,6 +109,24 @@ body {
 document.getElementById("homeBtn").addEventListener("click", () => {
     window.location.href = "dashboard.html";
 });
+
+const wrap = document.getElementById("settingsWrap");
+const panel = document.getElementById("settingsPanel");
+
+wrap.addEventListener("click", (e) => {
+    e.stopPropagation();
+    panel.style.display = (panel.style.display === "block") ? "none" : "block";
+});
+
+document.addEventListener("click", () => {
+    panel.style.display = "none";
+});
+
+// ログアウト
+function logout(){
+    localStorage.removeItem("role");
+    window.location.href = "index.html";
+}
 </script>
 
 </body>

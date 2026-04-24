@@ -319,12 +319,12 @@ body {
     <div class="menu">
         <div class="menu-item active">🏠</div>
         <div class="menu-item" id="userBtn">👤</div>
-        <div class="menu-item" id="settingsWrap">
-    ⚙️
-    <div class="settings-panel" id="settingsPanel">
-        <button onclick="logout()">ログアウト</button>
+            <div class="menu-item" id="settingsWrap">
+        ⚙️
+        <div class="settings-panel" id="settingsPanel">
+            <button onclick="logout()">ログアウト</button>
+        </div>
     </div>
-</div>
     </div>
 </div>
 <div class="container">
@@ -532,7 +532,7 @@ document.addEventListener("click", () => {
 // ログアウト
 function logout(){
     localStorage.removeItem("role");
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 }
 
 document.getElementById("userBtn").addEventListener("click", () => {

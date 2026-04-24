@@ -227,7 +227,7 @@ const role = localStorage.getItem("role");
 
 if (role !== "staff") {
     alert("権限がありません");
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 }
 
 // コンディション（例：70%）
@@ -260,12 +260,8 @@ document.addEventListener("click", () => {
 // ログアウト
 function logout(){
     localStorage.removeItem("role");
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 }
-
-document.getElementById("userBtn").addEventListener("click", () => {
-    window.location.href = "staff-list.html";
-});
 
 window.addEventListener("load", () => {
     const bar = document.querySelector(".progress");
