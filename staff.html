@@ -3,33 +3,117 @@
 <head>
 <meta charset="UTF-8">
 <title>スタッフ画面</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 body {
+    margin: 0;
     font-family: Arial;
     background: #f4f6f8;
-    margin: 0;
+}
+
+/* サイドバー */
+.sidebar {
+    width: 60px;
+    height: 100vh;
+    background: #1e1e2f;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.menu-item {
+    width: 40px;
+    height: 40px;
+    background: #2c2c3e;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-}
-.box {
-    background: white;
-    padding: 30px;
     border-radius: 10px;
-    text-align: center;
+    cursor: pointer;
+}
+
+.menu-item.active {
+    background: #007BFF;
+}
+
+/* メイン */
+.container {
+    margin-left: 60px;
+    padding: 20px;
+}
+
+/* カード */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.section-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 業務リスト */
+.task-list {
+    line-height: 1.8;
+}
+
+/* コンディション */
+.chart-box {
+    width: 200px;
+    margin: auto;
 }
 </style>
 </head>
 
 <body>
 
-<div class="box">
-    <h2>スタッフ画面</h2>
-    <p>ここはスタッフ専用ページです</p>
+<!-- サイドバー -->
+<div class="sidebar">
+    <div class="menu">
+        <div class="menu-item active">🏠</div>
+        <div class="menu-item">👤</div>
+        <div class="menu-item">⚙️</div>
+    </div>
+</div>
 
-    <button onclick="logout()">ログアウト</button>
+<div class="container">
+
+<!-- 今日の業務 -->
+<div class="card">
+    <div class="section-title">今日の業務</div>
+    <div class="task-list">
+        ・午前診療（9:00〜13:00）<br>
+        ・インプラント補助<br>
+        ・リコール患者対応<br>
+        ・カルテ入力整理
+    </div>
+</div>
+
+<!-- コンディション -->
+<div class="card">
+    <div class="section-title">今日のコンディション</div>
+    <div class="chart-box">
+        <canvas id="condition"></canvas>
+    </div>
+</div>
+
+<button onclick="logout()">ログアウト</button>
+
 </div>
 
 <script>
@@ -41,6 +125,22 @@ if (role !== "staff") {
     window.location.href = "login.html";
 }
 
+// コンディション（例：70%）
+new Chart(document.getElementById("condition"),{
+    type:'doughnut',
+    data:{
+        datasets:[{
+            data:[70,30],
+            backgroundColor:['#4caf50','#e0e0e0']
+        }]
+    },
+    options:{
+        cutout:'70%',
+        plugins:{legend:{display:false}}
+    }
+});
+
+// ログアウト
 function logout(){
     localStorage.removeItem("role");
     window.location.href = "login.html";
