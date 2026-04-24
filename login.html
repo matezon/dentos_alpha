@@ -59,8 +59,18 @@
 
 <script>
 function fakeLogin() {
-    // 何を入力しても通す
-    window.location.href = "dashboard.html";
+    const username = document.querySelector('input[type="text"]').value;
+
+    if (username === "president" || username === "staff") {
+
+        // ログイン情報保存（簡易）
+        localStorage.setItem("role", username);
+
+        window.location.href = "dashboard.html";
+    } else {
+        alert("ログインできませんでした");
+    }
+
     return false;
 }
 </script>

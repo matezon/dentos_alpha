@@ -15,6 +15,7 @@ body {
 .container {
     display: flex;
     height: 100vh;
+    margin-left: 60px;
 }
 
 /* 左 */
@@ -161,11 +162,62 @@ body {
     border-left: 4px solid #ff9800;
     margin-top: auto;
 }
+
+/* サイドバー */
+.sidebar {
+    width: 60px;
+    height: 100vh;
+    background: #1e1e2f;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+/* メニュー */
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* アイコン */
+.menu-item {
+    width: 40px;
+    height: 40px;
+    background: #2c2c3e;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.2s;
+}
+
+.menu-item:hover {
+    background: #007BFF;
+}
+
+/* 選択中 */
+.menu-item.active {
+    background: #007BFF;
+}
 </style>
 </head>
 
 <body>
-
+<div class="sidebar">
+    <div class="menu">
+        <div class="menu-item active">🏠</div>
+        <div class="menu-item">👤</div>
+        <div class="menu-item">⚙️</div>
+    </div>
+</div>
 <div class="container">
 
 <!-- 左 -->
@@ -247,6 +299,21 @@ body {
 </div>
 
 <script>
+
+// 権限別処理
+window.addEventListener("DOMContentLoaded", () => {
+
+    if (role === "staff") {
+        // staffは一部制限
+        document.querySelector(".improvement-card").style.display = "none";
+    }
+
+    if (role === "president") {
+        // president専用処理（例）
+        console.log("管理者ログイン");
+    }
+
+});
 
 /* スタッフ */
 ["a","b","c","d"].forEach((id,i)=>{
