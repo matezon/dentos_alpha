@@ -207,6 +207,28 @@ body {
 .menu-item.active {
     background: #007BFF;
 }
+
+/* 設定パネル */
+.settings-panel {
+    position: fixed;
+    bottom: 20px;
+    left: 80px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    display: none;
+}
+
+/* ボタン */
+.settings-panel button {
+    padding: 10px 15px;
+    border: none;
+    background: #ff4d4f;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
 </style>
 </head>
 
@@ -296,6 +318,10 @@ body {
 </div>
 
 </div>
+</div>
+
+<div class="settings-panel" id="settingsPanel">
+    <button onclick="logout()">ログアウト</button>
 </div>
 
 <script>
@@ -408,6 +434,30 @@ layout:{padding:{bottom:20}}
 }
 });
 
+const btn = document.getElementById("settingsBtn");
+const panel = document.getElementById("settingsPanel");
+
+// 開閉
+btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    panel.style.display = (panel.style.display === "block") ? "none" : "block";
+});
+
+// 外クリックで閉じる
+document.addEventListener("click", () => {
+    panel.style.display = "none";
+});
+
+// パネル内クリックは閉じない
+panel.addEventListener("click", (e) => {
+    e.stopPropagation();
+});
+
+// ログアウト
+function logout(){
+    localStorage.removeItem("role");
+    window.location.href = "login.html";
+}
 </script>
 
 </body>
