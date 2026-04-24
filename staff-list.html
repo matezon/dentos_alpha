@@ -83,17 +83,44 @@ body {
     border-radius: 10px;
 }
 
-/* スタッフ一覧 */
-.staff-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
 
 .staff-item {
     padding: 15px;
     background: #f0f0f0;
     border-radius: 8px;
+}
+
+.staff-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 270px);
+    gap: 10px;
+}
+
+.chart-wrapper {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: auto;
+}
+
+.chart-wrapper canvas {
+    width: 180px !important;
+    height: 180px !important;
+}
+
+.center-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #007BFF;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>
 </head>
@@ -117,12 +144,36 @@ body {
 <div class="container">
 
 <div class="card">
-    <h3>スタッフ一覧</h3>
+    <div class="section-title">スタッフ一覧</div>
 
-    <div class="staff-list">
-        <div class="staff-item">スタッフA</div>
-        <div class="staff-item">スタッフB</div>
-        <div class="staff-item">スタッフC</div>
+    <div class="staff-grid">
+        <div>
+            <div class="chart-wrapper">
+                <canvas id="a"></canvas>
+                <div class="center-icon">A</div>
+            </div>
+        </div>
+
+        <div>
+            <div class="chart-wrapper">
+                <canvas id="b"></canvas>
+                <div class="center-icon">B</div>
+            </div>
+        </div>
+
+        <div>
+            <div class="chart-wrapper">
+                <canvas id="c"></canvas>
+                <div class="center-icon">C</div>
+            </div>
+        </div>
+
+        <div>
+            <div class="chart-wrapper">
+                <canvas id="d"></canvas>
+                <div class="center-icon">D</div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -151,6 +202,24 @@ function logout(){
     localStorage.removeItem("role");
     window.location.href = "index.html";
 }
+
+["a","b","c","d"].forEach((id,i)=>{
+    const vals=[80,65,90,55];
+
+    new Chart(document.getElementById(id),{
+        type:'doughnut',
+        data:{
+            datasets:[{
+                data:[vals[i],100-vals[i]],
+                backgroundColor:['#28a745','#e0e0e0']
+            }]
+        },
+        options:{
+            cutout:'70%',
+            plugins:{legend:{display:false}}
+        }
+    });
+});
 </script>
 
 </body>

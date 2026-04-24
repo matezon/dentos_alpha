@@ -229,6 +229,7 @@ body {
     color: white;
     border-radius: 5px;
     cursor: pointer;
+    z-index: 9999;
 }
 
 /* 全体 */
@@ -290,6 +291,27 @@ body {
     background: #007BFF;
     transition: width 0.2s;
 }
+
+/* ヘッダー */
+.header {
+    position: fixed;
+    top: 0;
+    left: 60px; /* サイドバー分ずらす */
+    right: 0;
+    height: 60px;
+
+    background: white;
+    border-bottom: 1px solid #ddd;
+
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    z-index: 1000;
+}
 </style>
 </head>
 
@@ -326,6 +348,9 @@ body {
         </div>
     </div>
     </div>
+</div>
+<div class="header">
+    歯科医院経営ダッシュボード
 </div>
 <div class="container">
 
