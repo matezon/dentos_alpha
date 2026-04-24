@@ -211,7 +211,7 @@ body {
 .settings-panel {
     position: absolute;
     left: 50px;   /* 歯車のすぐ右 */
-    top: 50px;
+    top: 120px;
 
     background: white;
     padding: 10px;
@@ -230,10 +230,47 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
+
+/* オーバーレイ */
+#loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(3px);
+
+    z-index: 9999;
+}
+
+/* バーの枠 */
+.progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #e0e0e0;
+}
+
+/* 進捗 */
+.progress {
+    height: 100%;
+    width: 0%;
+    background: #007BFF;
+    transition: width 0.2s;
+}
 </style>
 </head>
 
 <body>
+<div id="loadingOverlay">
+    <div class="progress-bar">
+        <div class="progress"></div>
+    </div>
+</div>
 <div class="sidebar">
     <div class="menu">
         <div class="menu-item active">🏠</div>
@@ -456,6 +493,30 @@ function logout(){
 
 document.getElementById("userBtn").addEventListener("click", () => {
     window.location.href = "staff-list.html";
+});
+
+window.addEventListener("load", () => {
+    const bar = document.querySelector(".progress");
+    let width = 0;
+
+    const interval = setInterval(() => {
+        width += Math.random() * 20; // ランダムで進む（リアルっぽい）
+
+        if (width >= 100) {
+            width = 100;
+            bar.style.width = width + "%";
+
+            clearInterval(interval);
+
+            // 少し待ってから消す
+            setTimeout(() => {
+                document.getElementById("loadingOverlay").style.display = "none";
+            }, 300);
+        } else {
+            bar.style.width = width + "%";
+        }
+
+    }, 200);
 });
 </script>
 
