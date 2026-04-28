@@ -1,81 +1,814 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <title>ログイン</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DENTAL ERP | 経営コックピット</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .box {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            width: 300px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            box-sizing: border-box;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
-
-<div class="box">
-    <h2>ログイン</h2>
-
-    <form onsubmit="return fakeLogin();">
-        <input type="text" placeholder="ユーザー名" required>
-        <input type="password" placeholder="パスワード" required>
-        <button type="submit">ログイン</button>
-    </form>
-</div>
-
-<script>
-function fakeLogin() {
-    const username = document.querySelector('input[type="text"]').value;
-
-    if (username === "president") {
-        localStorage.setItem("role", "president");
-        window.location.href = "dashboard.html";
-
-    } else if (username === "staff") {
-        localStorage.setItem("role", "staff");
-        window.location.href = "staff.html";
-
-    } else {
-        alert("ログインできません（president / staff のみ）");
+    :root {
+      --bg-base:     #07111f;
+      --bg-sidebar:  #0b1a2e;
+      --bg-card:     #0d2240;
+      --bg-card2:    #0a1a32;
+      --accent:      #00c8d7;
+      --accent2:     #0096b0;
+      --text-main:   #e0eaf8;
+      --text-muted:  #6a8aaa;
+      --text-label:  #90aac8;
+      --warn:        #f0a000;
+      --danger:      #e84040;
+      --ok:          #30c875;
+      --ok2:         #20e870;
+      --border:      #163050;
+      --score-ring:  #00c8d7;
+      --score-bg:    #051020;
+      --sidebar-w:   200px;
     }
 
-    return false;
-}
-</script>
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', 'Noto Sans JP', sans-serif;
+      background: var(--bg-base);
+      color: var(--text-main);
+      font-size: 14px;
+    }
 
+    /* ===== LAYOUT ===== */
+    .app {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* --- Top header bar --- */
+    .topbar {
+      display: flex;
+      align-items: center;
+      background: #061020;
+      border-bottom: 1px solid var(--border);
+      height: 48px;
+      padding: 0 16px;
+      flex-shrink: 0;
+      gap: 0;
+      z-index: 100;
+    }
+    .topbar-logo {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: .06em;
+      white-space: nowrap;
+    }
+    .topbar-sep {
+      width: 1px;
+      height: 22px;
+      background: var(--border);
+      margin: 0 14px;
+      flex-shrink: 0;
+    }
+    .topbar-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: .04em;
+    }
+    .topbar-tabs {
+      display: flex;
+      gap: 4px;
+      margin-left: auto;
+    }
+    .topbar-tab {
+      font-size: 12px;
+      color: var(--text-muted);
+      padding: 4px 12px;
+      border-radius: 3px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all .2s;
+    }
+    .topbar-tab:hover, .topbar-tab.active {
+      color: var(--accent);
+      border-color: var(--accent2);
+      background: rgba(0,200,215,.07);
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      padding: 6px;
+      margin-left: auto;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-main);
+      border-radius: 2px;
+    }
+
+    /* --- Body row (sidebar + main + right panel) --- */
+    .body-row {
+      display: flex;
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    /* --- Sidebar --- */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow-y: auto;
+      transition: transform .28s ease;
+    }
+    .sidebar-group { padding: 14px 0 6px; }
+    .sidebar-group-label {
+      font-size: 9px;
+      letter-spacing: .12em;
+      color: var(--text-muted);
+      padding: 0 16px 6px;
+      text-transform: uppercase;
+    }
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 16px;
+      font-size: 12.5px;
+      color: var(--text-label);
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: all .18s;
+    }
+    .sidebar-item:hover { background: rgba(0,200,215,.06); color: var(--text-main); }
+    .sidebar-item.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: rgba(0,200,215,.1);
+    }
+    .sidebar-icon {
+      width: 16px;
+      text-align: center;
+      font-style: normal;
+      font-size: 14px;
+    }
+
+    /* --- Main content --- */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow-y: auto;
+    }
+    .main-inner {
+      padding: 20px 20px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-height: 100%;
+    }
+
+    /* Page heading row */
+    .page-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .page-heading h1 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: .06em;
+    }
+    .page-heading .subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Score cards row */
+    .score-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    /* Score card */
+    .score-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .score-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .score-card-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      color: var(--accent);
+    }
+    .score-card-sub {
+      font-size: 9.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .score-badge {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      border: 1px solid var(--accent2);
+      color: var(--accent);
+      letter-spacing: .04em;
+    }
+
+    .score-body {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Circle progress */
+    .circle-wrap {
+      flex-shrink: 0;
+      position: relative;
+      width: 100px;
+      height: 100px;
+    }
+    .circle-wrap svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    .circle-bg { fill: none; stroke: var(--score-bg); stroke-width: 8; }
+    .circle-ring {
+      fill: none;
+      stroke: var(--score-ring);
+      stroke-width: 8;
+      stroke-linecap: round;
+      transition: stroke-dashoffset .8s ease;
+    }
+    .circle-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.1;
+    }
+    .circle-score {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -.01em;
+    }
+    .circle-label {
+      font-size: 9px;
+      color: var(--text-muted);
+      letter-spacing: .04em;
+    }
+
+    /* Metrics list */
+    .metrics-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      flex: 1;
+      min-width: 0;
+    }
+    .metric-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+    }
+    .metric-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .metric-dot.ok  { background: var(--ok); }
+    .metric-dot.warn { background: var(--warn); }
+    .metric-dot.bad  { background: var(--danger); }
+    .metric-name { color: var(--text-label); flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .metric-val  { font-weight: 700; white-space: nowrap; }
+    .metric-val.ok   { color: var(--ok2); }
+    .metric-val.warn { color: var(--warn); }
+    .metric-val.bad  { color: var(--danger); }
+
+    /* Mini bar graph */
+    .mini-graph {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .mini-graph-label {
+      font-size: 9.5px;
+      color: var(--text-muted);
+    }
+    .mini-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 36px;
+    }
+    .mini-bar {
+      flex: 1;
+      border-radius: 2px 2px 0 0;
+      transition: height .5s ease;
+    }
+    .mini-bar.prev { background: #163a5a; }
+    .mini-bar.curr { background: var(--accent); }
+
+    /* Sync row */
+    .sync-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9.5px;
+      color: var(--text-muted);
+    }
+    .sync-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--ok);
+      box-shadow: 0 0 5px var(--ok);
+    }
+
+    /* --- Right panel (alerts) --- */
+    .right-panel {
+      width: 240px;
+      background: var(--bg-sidebar);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow-y: auto;
+    }
+    .right-panel-header {
+      padding: 14px 16px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+      letter-spacing: .04em;
+    }
+    .alert-list {
+      display: flex;
+      flex-direction: column;
+      padding: 10px 0;
+    }
+    .alert-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 8px 16px;
+      font-size: 11px;
+      border-bottom: 1px solid rgba(22,48,80,.6);
+      line-height: 1.45;
+      transition: background .15s;
+    }
+    .alert-item:hover { background: rgba(0,200,215,.04); }
+    .alert-icon {
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-style: normal;
+      font-size: 13px;
+    }
+    .alert-text { color: var(--text-label); }
+    .alert-text strong { color: var(--text-main); font-weight: 600; }
+    .alert-item.warn .alert-icon { color: var(--warn); }
+    .alert-item.danger .alert-icon { color: var(--danger); }
+    .alert-item.ok .alert-icon { color: var(--ok); }
+
+    /* Bottom stats row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .stat-card {
+      background: var(--bg-card2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+    .stat-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+      letter-spacing: .03em;
+    }
+    .stat-value {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -.01em;
+    }
+    .stat-value span {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-left: 2px;
+    }
+    .stat-change {
+      font-size: 10px;
+      margin-top: 3px;
+    }
+    .stat-change.up  { color: var(--ok2); }
+    .stat-change.down { color: var(--danger); }
+
+    /* ===== RESPONSIVE ===== */
+
+    /* Tablet: hide right panel inline, merge into accordion */
+    @media (max-width: 1024px) {
+      .right-panel { display: none; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .topbar-tabs { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --sidebar-w: 200px; }
+      .sidebar {
+        position: fixed;
+        top: 48px;
+        left: 0;
+        bottom: 0;
+        z-index: 200;
+        transform: translateX(-100%);
+      }
+      .sidebar.open { transform: translateX(0); }
+      .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        top: 48px;
+        background: rgba(0,0,0,.5);
+        z-index: 199;
+      }
+      .sidebar-overlay.open { display: block; }
+      .score-row { grid-template-columns: 1fr; }
+      .score-body { gap: 14px; }
+      .circle-wrap { width: 88px; height: 88px; }
+      .circle-score { font-size: 24px; }
+      .main-inner { padding: 14px 12px 24px; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .page-heading h1 { font-size: 17px; }
+    }
+
+    @media (max-width: 420px) {
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .score-body { flex-direction: column; align-items: center; }
+      .metrics-list { width: 100%; }
+    }
+
+    /* Alerts drawer for mobile */
+    .alert-drawer-toggle {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      background: #0b1a2e;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      width: 100%;
+      text-align: left;
+    }
+    @media (max-width: 1024px) {
+      .alert-drawer-toggle { display: flex; }
+      .alert-drawer { display: none; }
+      .alert-drawer.open {
+        display: block;
+        background: var(--bg-sidebar);
+        border: 1px solid var(--border);
+        border-radius: 0 0 6px 6px;
+        border-top: none;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <span class="topbar-logo">DENTAL ERP</span>
+    <div class="topbar-sep"></div>
+    <span class="topbar-title">経営コックピット</span>
+    <nav class="topbar-tabs">
+      <span class="topbar-tab active">ダッシュボード</span>
+      <span class="topbar-tab">レポート</span>
+      <span class="topbar-tab">設定</span>
+    </nav>
+    <div class="hamburger" id="hamburger" onclick="toggleSidebar()" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
+
+  <!-- Sidebar overlay (mobile) -->
+  <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+  <div class="body-row">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">分析</div>
+        <div class="sidebar-item active">
+          <i class="sidebar-icon">📊</i>経営分析
+        </div>
+        <div class="sidebar-item">
+          <i class="sidebar-icon">👥</i>人事管理
+        </div>
+        <div class="sidebar-item">
+          <i class="sidebar-icon">📅</i>予約管理
+        </div>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">ソリューション</div>
+        <div class="sidebar-item">
+          <i class="sidebar-icon">💻</i>ICTソリューション
+        </div>
+        <div class="sidebar-item">
+          <i class="sidebar-icon">🏥</i>診療支援
+        </div>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">サポート</div>
+        <div class="sidebar-item">
+          <i class="sidebar-icon">📋</i>事業サポート
+        </div>
+        <div class="sidebar-item">
+          <i class="sidebar-icon">⚙️</i>設定
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+      <div class="main-inner">
+
+        <!-- Page heading -->
+        <div class="page-heading">
+          <h1>院長</h1>
+          <span class="subtitle">Management Cockpit — 2026年4月</span>
+        </div>
+
+        <!-- Alert drawer (mobile/tablet) -->
+        <div>
+          <button class="alert-drawer-toggle" onclick="toggleAlerts()">
+            ⚠ アラート＆リマインド <span id="alert-arrow">▼</span>
+          </button>
+          <div class="alert-drawer" id="alert-drawer">
+            <div class="alert-list">
+              <div class="alert-item danger">
+                <i class="alert-icon">🔴</i>
+                <div class="alert-text"><strong>ICT定期アップデートがあります</strong><br>（重要）システムを更新してください</div>
+              </div>
+              <div class="alert-item warn">
+                <i class="alert-icon">🟡</i>
+                <div class="alert-text"><strong>月次コンフォートがあります</strong><br>コンフォートが未完了です</div>
+              </div>
+              <div class="alert-item warn">
+                <i class="alert-icon">🟡</i>
+                <div class="alert-text"><strong>ミーティング資料を準備してください</strong><br>Rec.3 資料作成が必要です</div>
+              </div>
+              <div class="alert-item ok">
+                <i class="alert-icon">🟢</i>
+                <div class="alert-text"><strong>目標達成率が改善しています</strong><br>先月比 +5% 達成</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Score row -->
+        <div class="score-row">
+
+          <!-- Card 1: 経営分析スコア -->
+          <div class="score-card">
+            <div class="score-card-header">
+              <div>
+                <div class="score-card-title">経営分析スコア</div>
+                <div class="score-card-sub">Management Score</div>
+              </div>
+              <div class="score-badge">月次</div>
+            </div>
+            <div class="score-body">
+              <!-- Circle -->
+              <div class="circle-wrap">
+                <svg viewBox="0 0 100 100">
+                  <circle class="circle-bg" cx="50" cy="50" r="42" />
+                  <circle class="circle-ring" cx="50" cy="50" r="42"
+                    stroke-dasharray="263.9"
+                    stroke-dashoffset="31.7"
+                    style="stroke:#00c8d7" />
+                </svg>
+                <div class="circle-inner">
+                  <span class="circle-score">88</span>
+                  <span class="circle-label">/ 100</span>
+                </div>
+              </div>
+              <!-- Metrics -->
+              <div class="metrics-list">
+                <div class="metric-item">
+                  <div class="metric-dot ok"></div>
+                  <span class="metric-name">自費率達成率</span>
+                  <span class="metric-val ok">+17%</span>
+                </div>
+                <div class="metric-item">
+                  <div class="metric-dot ok"></div>
+                  <span class="metric-name">キャンセル率</span>
+                  <span class="metric-val ok">3% Low</span>
+                </div>
+                <div class="metric-item">
+                  <div class="metric-dot warn"></div>
+                  <span class="metric-name">新患数</span>
+                  <span class="metric-val warn">50 (目標)</span>
+                </div>
+                <div class="metric-item">
+                  <div class="metric-dot ok"></div>
+                  <span class="metric-name">月次対比シンクロ率</span>
+                  <span class="metric-val ok">92%</span>
+                </div>
+              </div>
+            </div>
+            <!-- Mini graph -->
+            <div class="mini-graph">
+              <div class="mini-graph-label">月次対比推移</div>
+              <div class="mini-bars">
+                <div class="mini-bar prev" style="height:55%"></div>
+                <div class="mini-bar prev" style="height:60%"></div>
+                <div class="mini-bar prev" style="height:50%"></div>
+                <div class="mini-bar prev" style="height:70%"></div>
+                <div class="mini-bar prev" style="height:65%"></div>
+                <div class="mini-bar curr" style="height:80%"></div>
+                <div class="mini-bar curr" style="height:88%"></div>
+              </div>
+            </div>
+            <div class="sync-row">
+              <div class="sync-dot"></div>データ同期済み — 今日 08:32
+            </div>
+          </div>
+
+          <!-- Card 2: 人事管理スコア -->
+          <div class="score-card">
+            <div class="score-card-header">
+              <div>
+                <div class="score-card-title">人事管理スコア</div>
+                <div class="score-card-sub">HR Management Score</div>
+              </div>
+              <div class="score-badge">月次</div>
+            </div>
+            <div class="score-body">
+              <!-- Circle -->
+              <div class="circle-wrap">
+                <svg viewBox="0 0 100 100">
+                  <circle class="circle-bg" cx="50" cy="50" r="42" />
+                  <circle class="circle-ring" cx="50" cy="50" r="42"
+                    stroke-dasharray="263.9"
+                    stroke-dashoffset="66.0"
+                    style="stroke:#f0a000" />
+                </svg>
+                <div class="circle-inner">
+                  <span class="circle-score" style="color:#f0c060">75</span>
+                  <span class="circle-label">/ 100</span>
+                </div>
+              </div>
+              <!-- Metrics -->
+              <div class="metrics-list">
+                <div class="metric-item">
+                  <div class="metric-dot ok"></div>
+                  <span class="metric-name">有給消化率 (Rec.1 達成)</span>
+                  <span class="metric-val ok">85%</span>
+                </div>
+                <div class="metric-item">
+                  <div class="metric-dot ok"></div>
+                  <span class="metric-name">残業 (Sat.) 改善</span>
+                  <span class="metric-val ok">-42%</span>
+                </div>
+                <div class="metric-item">
+                  <div class="metric-dot warn"></div>
+                  <span class="metric-name">面談 (Sat.) スコア</span>
+                  <span class="metric-val warn">68 / 92</span>
+                </div>
+                <div class="metric-item">
+                  <div class="metric-dot warn"></div>
+                  <span class="metric-name">定着率 Rec.3</span>
+                  <span class="metric-val warn">要改善</span>
+                </div>
+              </div>
+            </div>
+            <!-- Mini graph -->
+            <div class="mini-graph">
+              <div class="mini-graph-label">月次対比推移</div>
+              <div class="mini-bars">
+                <div class="mini-bar prev" style="height:60%"></div>
+                <div class="mini-bar prev" style="height:55%"></div>
+                <div class="mini-bar prev" style="height:65%"></div>
+                <div class="mini-bar prev" style="height:60%"></div>
+                <div class="mini-bar prev" style="height:70%"></div>
+                <div class="mini-bar curr" style="height:72%"></div>
+                <div class="mini-bar curr" style="height:75%" style="background:#f0a000"></div>
+              </div>
+            </div>
+            <div class="sync-row">
+              <div class="sync-dot"></div>データ同期済み — 今日 08:32
+            </div>
+          </div>
+
+        </div><!-- /.score-row -->
+
+        <!-- Bottom stats row -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-label">月次売上</div>
+            <div class="stat-value">¥4.2<span>百万</span></div>
+            <div class="stat-change up">▲ 8.3% 前月比</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">延べ患者数</div>
+            <div class="stat-value">823<span>人</span></div>
+            <div class="stat-change up">▲ 5.1% 前月比</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">新患獲得</div>
+            <div class="stat-value">48<span>人</span></div>
+            <div class="stat-change down">▼ 2 目標未達</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">スタッフ稼働率</div>
+            <div class="stat-value">91<span>%</span></div>
+            <div class="stat-change up">▲ 3.2% 前月比</div>
+          </div>
+        </div>
+
+      </div><!-- /.main-inner -->
+    </main>
+
+    <!-- Right panel (desktop only) -->
+    <aside class="right-panel">
+      <div class="right-panel-header">⚠ アラート＆リマインド</div>
+      <div class="alert-list">
+        <div class="alert-item danger">
+          <i class="alert-icon">🔴</i>
+          <div class="alert-text"><strong>ICT定期アップデートがあります</strong><br>（重要）システムを更新してください</div>
+        </div>
+        <div class="alert-item warn">
+          <i class="alert-icon">🟡</i>
+          <div class="alert-text"><strong>月次コンフォートがあります</strong><br>コンフォートが未完了です</div>
+        </div>
+        <div class="alert-item warn">
+          <i class="alert-icon">🟡</i>
+          <div class="alert-text"><strong>ミーティング資料を準備してください</strong><br>Rec.3 資料作成が必要です</div>
+        </div>
+        <div class="alert-item ok">
+          <i class="alert-icon">🟢</i>
+          <div class="alert-text"><strong>目標達成率が改善しています</strong><br>先月比 +5% 達成</div>
+        </div>
+        <div class="alert-item warn">
+          <i class="alert-icon">🟡</i>
+          <div class="alert-text"><strong>定着率レポートを確認</strong><br>Rec.3 期日が近づいています</div>
+        </div>
+        <div class="alert-item ok">
+          <i class="alert-icon">🟢</i>
+          <div class="alert-text"><strong>有給消化率が目標達成</strong><br>4月分 完了</div>
+        </div>
+      </div>
+    </aside>
+
+  </div><!-- /.body-row -->
+</div><!-- /.app -->
+
+<script>
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('overlay').classList.toggle('open');
+  }
+  function toggleAlerts() {
+    const drawer = document.getElementById('alert-drawer');
+    const arrow  = document.getElementById('alert-arrow');
+    drawer.classList.toggle('open');
+    arrow.textContent = drawer.classList.contains('open') ? '▲' : '▼';
+  }
+</script>
 </body>
 </html>
