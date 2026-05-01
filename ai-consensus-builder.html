@@ -8,21 +8,21 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-base:     #07111f;
-      --bg-sidebar:  #0b1a2e;
-      --bg-card:     #0d2240;
-      --bg-card2:    #0a1a32;
-      --accent:      #00c8d7;
-      --accent2:     #0096b0;
-      --text-main:   #e0eaf8;
-      --text-muted:  #6a8aaa;
-      --text-label:  #90aac8;
-      --warn:        #f0a000;
-      --danger:      #e84040;
-      --ok:          #30c875;
-      --ok2:         #20e870;
-      --border:      #163050;
-      --sidebar-w:   200px;
+      --bg-base:    #07111f;
+      --bg-sidebar: #0b1a2e;
+      --bg-card:    #0d2240;
+      --bg-card2:   #0a1a32;
+      --accent:     #00c8d7;
+      --accent2:    #0096b0;
+      --text-main:  #e0eaf8;
+      --text-muted: #6a8aaa;
+      --text-label: #90aac8;
+      --warn:       #f0a000;
+      --danger:     #e84040;
+      --ok:         #30c875;
+      --ok2:        #20e870;
+      --border:     #163050;
+      --sidebar-w:  200px;
     }
 
     html, body {
@@ -33,329 +33,296 @@
       font-size: 14px;
     }
 
-    .app {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+    .app { display: flex; flex-direction: column; min-height: 100vh; }
 
+    /* ===== TOPBAR ===== */
     .topbar {
-      display: flex;
-      align-items: center;
-      background: #061020;
-      border-bottom: 1px solid var(--border);
-      height: 48px;
-      padding: 0 16px;
-      flex-shrink: 0;
-      gap: 0;
-      z-index: 100;
+      display: flex; align-items: center;
+      background: #061020; border-bottom: 1px solid var(--border);
+      height: 48px; padding: 0 16px; flex-shrink: 0; gap: 0; z-index: 100;
     }
-    .topbar-logo {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: .06em;
-      white-space: nowrap;
-    }
-    .topbar-sep {
-      width: 1px;
-      height: 22px;
-      background: var(--border);
-      margin: 0 14px;
-      flex-shrink: 0;
-    }
-    .topbar-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text-main);
-      letter-spacing: .04em;
-    }
-    .topbar-tabs {
-      display: flex;
-      gap: 4px;
-      margin-left: auto;
-    }
+    .topbar-logo { font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: .06em; white-space: nowrap; }
+    .topbar-sep { width: 1px; height: 22px; background: var(--border); margin: 0 14px; flex-shrink: 0; }
+    .topbar-title { font-size: 15px; font-weight: 700; color: var(--text-main); letter-spacing: .04em; }
+    .topbar-tabs { display: flex; gap: 4px; margin-left: auto; }
     .topbar-tab {
-      font-size: 12px;
-      color: var(--text-muted);
-      padding: 4px 12px;
-      border-radius: 3px;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: all .2s;
-      text-decoration: none;
+      font-size: 12px; color: var(--text-muted); padding: 4px 12px;
+      border-radius: 3px; cursor: pointer; border: 1px solid transparent;
+      transition: all .2s; text-decoration: none;
     }
     .topbar-tab:hover, .topbar-tab.active {
-      color: var(--accent);
-      border-color: var(--accent2);
-      background: rgba(0,200,215,.07);
+      color: var(--accent); border-color: var(--accent2); background: rgba(0,200,215,.07);
     }
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      cursor: pointer;
-      padding: 6px;
-      margin-left: auto;
-    }
-    .hamburger span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--text-main);
-      border-radius: 2px;
-    }
+    .hamburger { display: none; flex-direction: column; gap: 4px; cursor: pointer; padding: 6px; margin-left: auto; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-main); border-radius: 2px; }
 
-    .body-row {
-      display: flex;
-      flex: 1;
-      min-height: 0;
-      overflow: hidden;
-    }
+    /* ===== BODY ROW ===== */
+    .body-row { display: flex; flex: 1; min-height: 0; overflow: hidden; }
 
+    /* ===== SIDEBAR ===== */
     .sidebar {
-      width: var(--sidebar-w);
-      background: var(--bg-sidebar);
+      width: var(--sidebar-w); background: var(--bg-sidebar);
       border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
-      overflow-y: auto;
-      transition: transform .28s ease;
+      display: flex; flex-direction: column; flex-shrink: 0;
+      overflow-y: auto; transition: transform .28s ease;
     }
     .sidebar-group { padding: 14px 0 6px; }
-    .sidebar-group-label {
-      font-size: 9px;
-      letter-spacing: .12em;
-      color: var(--text-muted);
-      padding: 0 16px 6px;
-      text-transform: uppercase;
-    }
+    .sidebar-group-label { font-size: 9px; letter-spacing: .12em; color: var(--text-muted); padding: 0 16px 6px; text-transform: uppercase; }
     .sidebar-item {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      padding: 9px 16px;
-      font-size: 12.5px;
-      color: var(--text-label);
-      cursor: pointer;
-      border-left: 3px solid transparent;
-      transition: all .18s;
-      text-decoration: none;
+      display: flex; align-items: center; gap: 9px; padding: 9px 16px;
+      font-size: 12.5px; color: var(--text-label); cursor: pointer;
+      border-left: 3px solid transparent; transition: all .18s; text-decoration: none;
     }
     .sidebar-item:hover { background: rgba(0,200,215,.06); color: var(--text-main); }
-    .sidebar-item.active {
-      color: var(--accent);
-      border-left-color: var(--accent);
-      background: rgba(0,200,215,.1);
-    }
-    .sidebar-icon {
-      width: 16px;
-      text-align: center;
-      font-style: normal;
-      font-size: 14px;
-    }
+    .sidebar-item.active { color: var(--accent); border-left-color: var(--accent); background: rgba(0,200,215,.1); }
+    .sidebar-icon { width: 16px; text-align: center; font-style: normal; font-size: 14px; }
 
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-      overflow-y: auto;
-    }
-    .main-inner {
-      padding: 20px 20px 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      min-height: 100%;
-    }
+    /* ===== MAIN ===== */
+    .main { flex: 1; display: flex; flex-direction: column; min-width: 0; overflow-y: auto; }
+    .main-inner { padding: 20px 20px 28px; display: flex; flex-direction: column; gap: 16px; min-height: 100%; }
 
-    .page-heading {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-    }
-    .page-heading h1 {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: .06em;
-    }
-    .page-heading .subtitle {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
+    .page-heading { display: flex; align-items: baseline; gap: 10px; }
+    .page-heading h1 { font-size: 20px; font-weight: 700; letter-spacing: .06em; }
+    .page-heading .subtitle { font-size: 11px; color: var(--text-muted); }
 
-    /* ページ固有: カードグリッド */
-    .content-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 20px 22px;
+    /* ===== PATIENT LIST ===== */
+    .list-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden;
     }
-    .content-card-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: .04em;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .content-card-body {
-      color: var(--text-label);
-      font-size: 12.5px;
-      line-height: 1.7;
-    }
-
-    .status-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-    .status-item {
-      background: var(--bg-card2);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 14px 16px;
-    }
-    .status-item-label {
-      font-size: 10px;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-      letter-spacing: .03em;
-    }
-    .status-item-value {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--text-main);
-    }
-    .status-item-value.ok  { color: var(--ok2); }
-    .status-item-value.warn { color: var(--warn); }
-
-    .consensus-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 12px;
-    }
-    .consensus-table th {
-      background: rgba(0,200,215,.08);
-      color: var(--accent);
-      font-weight: 600;
-      padding: 8px 12px;
-      text-align: left;
+    .list-card-header {
+      padding: 12px 16px; font-size: 12px; font-weight: 700;
+      color: var(--accent); letter-spacing: .04em;
       border-bottom: 1px solid var(--border);
-      letter-spacing: .04em;
+      display: flex; align-items: center; gap: 8px;
     }
-    .consensus-table td {
-      padding: 9px 12px;
-      color: var(--text-label);
-      border-bottom: 1px solid rgba(22,48,80,.5);
+    .patient-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .patient-table th {
+      background: rgba(0,200,215,.06); color: var(--text-muted);
+      font-weight: 600; padding: 8px 14px; text-align: left;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: .04em; font-size: 10.5px;
     }
-    .consensus-table tr:last-child td { border-bottom: none; }
-    .consensus-table tr:hover td { background: rgba(0,200,215,.04); }
-    .tag {
-      display: inline-block;
-      font-size: 9.5px;
-      padding: 2px 8px;
-      border-radius: 10px;
-      font-weight: 600;
-      letter-spacing: .03em;
-    }
-    .tag-ok    { background: rgba(48,200,117,.15); color: var(--ok2); border: 1px solid rgba(48,200,117,.3); }
-    .tag-warn  { background: rgba(240,160,0,.12); color: var(--warn); border: 1px solid rgba(240,160,0,.3); }
-    .tag-info  { background: rgba(0,200,215,.1); color: var(--accent); border: 1px solid rgba(0,200,215,.25); }
+    .patient-table td { padding: 10px 14px; color: var(--text-label); border-bottom: 1px solid rgba(22,48,80,.45); }
+    .patient-table tbody tr:last-child td { border-bottom: none; }
+    .patient-table tbody tr { cursor: pointer; transition: background .15s; }
+    .patient-table tbody tr:hover td { background: rgba(0,200,215,.06); color: var(--text-main); }
+    .patient-table tbody tr.selected td { background: rgba(0,200,215,.12); color: var(--text-main); }
+    .patient-table tbody tr.selected td:first-child { border-left: 3px solid var(--accent); }
 
-    /* Right panel */
+    .tag {
+      display: inline-block; font-size: 9.5px; padding: 2px 8px;
+      border-radius: 10px; font-weight: 600; letter-spacing: .03em;
+    }
+    .tag-ok   { background: rgba(48,200,117,.15); color: var(--ok2);   border: 1px solid rgba(48,200,117,.3); }
+    .tag-warn { background: rgba(240,160,0,.12);  color: var(--warn);  border: 1px solid rgba(240,160,0,.3); }
+    .tag-bad  { background: rgba(232,64,64,.12);  color: var(--danger); border: 1px solid rgba(232,64,64,.3); }
+    .tag-info { background: rgba(0,200,215,.1);   color: var(--accent); border: 1px solid rgba(0,200,215,.25); }
+    .tag-muted { background: rgba(106,138,170,.1); color: var(--text-muted); border: 1px solid rgba(106,138,170,.25); }
+
+    /* ===== DETAIL VIEW ===== */
+    .detail-view {
+      display: none; background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: 8px;
+      overflow: hidden; flex-direction: column;
+    }
+    .detail-view.visible { display: flex; }
+
+    .detail-header {
+      padding: 14px 18px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+      background: rgba(0,200,215,.04);
+    }
+    .detail-name { font-size: 17px; font-weight: 800; color: var(--text-main); }
+    .detail-meta { font-size: 11px; color: var(--text-muted); }
+    .detail-treatment { font-size: 12px; color: var(--accent); }
+    .detail-doctor { font-size: 11px; color: var(--text-label); }
+
+    .detail-body {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+    }
+
+    /* ===== LEFT: Status + Reminders ===== */
+    .status-panel {
+      padding: 20px 22px; border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 22px;
+    }
+
+    /* Progress stepper */
+    .section-label {
+      font-size: 10px; font-weight: 700; color: var(--accent);
+      letter-spacing: .1em; text-transform: uppercase;
+      margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: rgba(0,200,215,.2); }
+
+    .stepper {
+      display: flex; align-items: flex-start; gap: 0;
+      overflow-x: auto; padding-bottom: 4px;
+    }
+    .step {
+      display: flex; flex-direction: column; align-items: center;
+      flex: 1; min-width: 72px; position: relative;
+    }
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute; top: 14px; left: calc(50% + 14px);
+      width: calc(100% - 28px); height: 2px;
+      background: var(--border);
+      z-index: 0;
+    }
+    .step.done:not(:last-child)::after  { background: var(--accent2); }
+    .step.current:not(:last-child)::after { background: var(--border); }
+
+    .step-dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 2px solid var(--border); background: var(--bg-base);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: var(--text-muted);
+      position: relative; z-index: 1; flex-shrink: 0;
+      transition: all .2s;
+    }
+    .step.done    .step-dot { background: var(--accent2); border-color: var(--accent2); color: #fff; }
+    .step.current .step-dot {
+      background: var(--accent); border-color: var(--accent); color: #07111f;
+      box-shadow: 0 0 10px rgba(0,200,215,.5);
+    }
+    .step-label {
+      font-size: 9.5px; color: var(--text-muted);
+      margin-top: 6px; text-align: center; line-height: 1.3;
+      white-space: nowrap;
+    }
+    .step.done    .step-label { color: var(--text-label); }
+    .step.current .step-label { color: var(--accent); font-weight: 700; }
+
+    .step-current-badge {
+      margin-top: 16px;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: var(--text-label);
+    }
+    .step-current-badge strong { color: var(--accent); }
+
+    /* Reminders */
+    .reminder-list { display: flex; flex-direction: column; gap: 8px; }
+    .reminder-item {
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 10px 12px;
+      background: var(--bg-card2); border: 1px solid var(--border);
+      border-radius: 6px; font-size: 12px; line-height: 1.55;
+    }
+    .reminder-item.urgent {
+      border-color: rgba(232,64,64,.4);
+      background: rgba(232,64,64,.05);
+    }
+    .reminder-item.caution {
+      border-color: rgba(240,160,0,.35);
+      background: rgba(240,160,0,.04);
+    }
+    .reminder-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+    .reminder-text { color: var(--text-label); }
+    .reminder-text strong { color: var(--text-main); font-weight: 600; }
+    .reminder-item.urgent .reminder-text strong { color: var(--danger); }
+    .reminder-item.caution .reminder-text strong { color: var(--warn); }
+    .reminder-date { font-size: 10px; color: var(--text-muted); margin-top: 3px; }
+
+    /* ===== RIGHT: Summary card ===== */
+    .summary-panel {
+      padding: 20px 18px; background: #060e1a;
+      display: flex; flex-direction: column; gap: 18px;
+    }
+    .summary-kv { display: flex; flex-direction: column; gap: 10px; }
+    .summary-row {
+      display: flex; flex-direction: column; gap: 3px;
+      padding-bottom: 10px; border-bottom: 1px solid rgba(22,48,80,.5);
+    }
+    .summary-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .summary-key { font-size: 9.5px; color: var(--text-muted); letter-spacing: .06em; text-transform: uppercase; }
+    .summary-val { font-size: 13px; color: var(--text-main); font-weight: 600; }
+    .summary-val.ok   { color: var(--ok2); }
+    .summary-val.warn { color: var(--warn); }
+    .summary-val.bad  { color: var(--danger); }
+
+    /* AI Score ring */
+    .ai-score-wrap {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .ai-score-ring {
+      position: relative; width: 80px; height: 80px;
+    }
+    .ai-score-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .ring-bg  { fill: none; stroke: #051020; stroke-width: 7; }
+    .ring-fill { fill: none; stroke: var(--accent); stroke-width: 7; stroke-linecap: round; transition: stroke-dashoffset .6s ease; }
+    .ring-inner {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .ring-score { font-size: 20px; font-weight: 800; color: var(--text-main); }
+    .ring-label { font-size: 8px; color: var(--text-muted); }
+    .ai-score-caption { font-size: 10px; color: var(--text-muted); text-align: center; }
+
+    /* ===== RIGHT PANEL (alerts) ===== */
     .right-panel {
-      width: 240px;
-      background: var(--bg-sidebar);
+      width: 240px; background: var(--bg-sidebar);
       border-left: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
-      overflow-y: auto;
+      display: flex; flex-direction: column; flex-shrink: 0; overflow-y: auto;
     }
     .right-panel-header {
-      padding: 14px 16px 10px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--accent);
-      border-bottom: 1px solid var(--border);
-      letter-spacing: .04em;
+      padding: 14px 16px 10px; font-size: 12px; font-weight: 700;
+      color: var(--accent); border-bottom: 1px solid var(--border); letter-spacing: .04em;
     }
     .alert-list { display: flex; flex-direction: column; padding: 10px 0; }
     .alert-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      padding: 8px 16px;
-      font-size: 11px;
+      display: flex; align-items: flex-start; gap: 8px;
+      padding: 8px 16px; font-size: 11px;
       border-bottom: 1px solid rgba(22,48,80,.6);
-      line-height: 1.45;
-      transition: background .15s;
+      line-height: 1.45; transition: background .15s;
     }
     .alert-item:hover { background: rgba(0,200,215,.04); }
     .alert-icon { flex-shrink: 0; margin-top: 1px; font-style: normal; font-size: 13px; }
     .alert-text { color: var(--text-label); }
     .alert-text strong { color: var(--text-main); font-weight: 600; }
-    .alert-item.warn .alert-icon { color: var(--warn); }
+    .alert-item.warn .alert-icon   { color: var(--warn); }
     .alert-item.danger .alert-icon { color: var(--danger); }
-    .alert-item.ok .alert-icon { color: var(--ok); }
+    .alert-item.ok .alert-icon     { color: var(--ok); }
 
-    /* Alert drawer (mobile) */
     .alert-drawer-toggle {
-      display: none;
-      align-items: center;
-      gap: 8px;
-      background: #0b1a2e;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 10px 14px;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--accent);
-      width: 100%;
-      text-align: left;
+      display: none; align-items: center; gap: 8px;
+      background: #0b1a2e; border: 1px solid var(--border); border-radius: 6px;
+      padding: 10px 14px; cursor: pointer; font-size: 12px;
+      font-weight: 600; color: var(--accent); width: 100%; text-align: left;
     }
 
-    /* Responsive */
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
       .right-panel { display: none; }
-      .status-grid { grid-template-columns: repeat(2, 1fr); }
       .topbar-tabs { display: none; }
       .hamburger { display: flex; }
       .alert-drawer-toggle { display: flex; }
       .alert-drawer { display: none; }
       .alert-drawer.open {
-        display: block;
-        background: var(--bg-sidebar);
-        border: 1px solid var(--border);
-        border-radius: 0 0 6px 6px;
-        border-top: none;
+        display: block; background: var(--bg-sidebar);
+        border: 1px solid var(--border); border-radius: 0 0 6px 6px; border-top: none;
       }
+    }
+    @media (max-width: 900px) {
+      .detail-body { grid-template-columns: 1fr; }
+      .status-panel { border-right: none; border-bottom: 1px solid var(--border); }
     }
     @media (max-width: 768px) {
       .sidebar {
-        position: fixed;
-        top: 48px; left: 0; bottom: 0;
-        z-index: 200;
-        transform: translateX(-100%);
+        position: fixed; top: 48px; left: 0; bottom: 0;
+        z-index: 200; transform: translateX(-100%);
       }
       .sidebar.open { transform: translateX(0); }
       .sidebar-overlay {
-        display: none;
-        position: fixed;
-        inset: 0; top: 48px;
-        background: rgba(0,0,0,.5);
-        z-index: 199;
+        display: none; position: fixed; inset: 0; top: 48px;
+        background: rgba(0,0,0,.5); z-index: 199;
       }
       .sidebar-overlay.open { display: block; }
-      .status-grid { grid-template-columns: 1fr 1fr; }
       .main-inner { padding: 14px 12px 24px; }
       .page-heading h1 { font-size: 17px; }
+      .stepper { gap: 0; }
     }
   </style>
 </head>
@@ -429,7 +396,7 @@
           <span class="subtitle">診断・治療計画 コンセンサス支援 — 2026年4月</span>
         </div>
 
-        <!-- Alert drawer (mobile/tablet) -->
+        <!-- Mobile alert drawer -->
         <div>
           <button class="alert-drawer-toggle" onclick="toggleAlerts()">
             ⚠ アラート＆リマインド <span id="alert-arrow">▼</span>
@@ -438,7 +405,7 @@
             <div class="alert-list">
               <div class="alert-item warn">
                 <i class="alert-icon">🟡</i>
-                <div class="alert-text"><strong>未確認の治療計画が3件あります</strong><br>患者同意を確認してください</div>
+                <div class="alert-text"><strong>同意待ちの患者が2名います</strong><br>フォローアップを行ってください</div>
               </div>
               <div class="alert-item ok">
                 <i class="alert-icon">🟢</i>
@@ -448,109 +415,88 @@
           </div>
         </div>
 
-        <!-- Status summary -->
-        <div class="status-grid">
-          <div class="status-item">
-            <div class="status-item-label">今月の合意形成件数</div>
-            <div class="status-item-value ok">42<span style="font-size:12px;font-weight:400;color:var(--text-muted)"> 件</span></div>
+        <!-- Patient list -->
+        <div class="list-card">
+          <div class="list-card-header">
+            🤖 患者一覧 — 患者を選択すると詳細を表示します
           </div>
-          <div class="status-item">
-            <div class="status-item-label">コンセンサス達成率</div>
-            <div class="status-item-value ok">87<span style="font-size:12px;font-weight:400;color:var(--text-muted)">%</span></div>
-          </div>
-          <div class="status-item">
-            <div class="status-item-label">未確認（要フォロー）</div>
-            <div class="status-item-value warn">3<span style="font-size:12px;font-weight:400;color:var(--text-muted)"> 件</span></div>
-          </div>
-        </div>
-
-        <!-- Main table card -->
-        <div class="content-card">
-          <div class="content-card-title">
-            <span>🤖</span> 治療計画コンセンサス一覧
-          </div>
-          <table class="consensus-table">
+          <table class="patient-table">
             <thead>
               <tr>
                 <th>患者ID</th>
-                <th>治療計画</th>
-                <th>AIスコア</th>
-                <th>患者同意</th>
+                <th>氏名</th>
+                <th>年齢</th>
+                <th>治療内容</th>
                 <th>担当医</th>
-                <th>更新日</th>
+                <th>進行状態</th>
+                <th>AIスコア</th>
+                <th>次回来院</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>#1042</td>
-                <td>インプラント（上顎2本）</td>
-                <td><span class="tag tag-ok">92 / 100</span></td>
-                <td><span class="tag tag-ok">同意済</span></td>
-                <td>田中 先生</td>
-                <td>2026-04-28</td>
-              </tr>
-              <tr>
-                <td>#1087</td>
-                <td>矯正治療（マウスピース）</td>
-                <td><span class="tag tag-ok">88 / 100</span></td>
-                <td><span class="tag tag-ok">同意済</span></td>
-                <td>山田 先生</td>
-                <td>2026-04-27</td>
-              </tr>
-              <tr>
-                <td>#1103</td>
-                <td>根管治療＋クラウン</td>
-                <td><span class="tag tag-warn">74 / 100</span></td>
-                <td><span class="tag tag-warn">要確認</span></td>
-                <td>田中 先生</td>
-                <td>2026-04-26</td>
-              </tr>
-              <tr>
-                <td>#1115</td>
-                <td>ホワイトニング（オフィス）</td>
-                <td><span class="tag tag-ok">95 / 100</span></td>
-                <td><span class="tag tag-ok">同意済</span></td>
-                <td>鈴木 先生</td>
-                <td>2026-04-25</td>
-              </tr>
-              <tr>
-                <td>#1121</td>
-                <td>歯周病治療（SRP）</td>
-                <td><span class="tag tag-warn">70 / 100</span></td>
-                <td><span class="tag tag-warn">要確認</span></td>
-                <td>山田 先生</td>
-                <td>2026-04-24</td>
-              </tr>
-              <tr>
-                <td>#1134</td>
-                <td>義歯製作（部分床義歯）</td>
-                <td><span class="tag tag-warn">68 / 100</span></td>
-                <td><span class="tag tag-warn">要確認</span></td>
-                <td>田中 先生</td>
-                <td>2026-04-23</td>
-              </tr>
-              <tr>
-                <td>#1148</td>
-                <td>審美補綴（ラミネートベニア）</td>
-                <td><span class="tag tag-ok">91 / 100</span></td>
-                <td><span class="tag tag-ok">同意済</span></td>
-                <td>鈴木 先生</td>
-                <td>2026-04-22</td>
-              </tr>
-            </tbody>
+            <tbody id="patient-tbody"></tbody>
           </table>
         </div>
 
-        <!-- Memo card -->
-        <div class="content-card">
-          <div class="content-card-title">
-            <span>💡</span> AIコンセンサス・ビルダーについて
+        <!-- Detail view -->
+        <div class="detail-view" id="detail-view">
+
+          <!-- Header -->
+          <div class="detail-header">
+            <div>
+              <div class="detail-name" id="d-name"></div>
+              <div class="detail-meta" id="d-meta"></div>
+            </div>
+            <div class="detail-treatment" id="d-treatment"></div>
+            <div class="detail-doctor" id="d-doctor"></div>
+            <div style="margin-left:auto" id="d-status-badge"></div>
           </div>
-          <div class="content-card-body">
-            AIコンセンサス・ビルダーは、診断データと患者属性をもとに治療計画の最適度をスコアリングし、
-            医師と患者の合意形成をサポートするシステムです。<br><br>
-            スコアが80未満の場合は追加説明や代替案の提示を推奨します。
-            要確認の案件は優先的にフォローアップを行ってください。
+
+          <div class="detail-body">
+
+            <!-- Left -->
+            <div class="status-panel">
+
+              <!-- Stepper -->
+              <div>
+                <div class="section-label">進行状態</div>
+                <div class="stepper" id="stepper"></div>
+                <div class="step-current-badge" id="step-badge"></div>
+              </div>
+
+              <!-- Reminders -->
+              <div>
+                <div class="section-label">備考・リマインド</div>
+                <div class="reminder-list" id="reminder-list"></div>
+              </div>
+
+            </div>
+
+            <!-- Right: summary -->
+            <div class="summary-panel">
+              <div>
+                <div class="section-label">AIスコア</div>
+                <div class="ai-score-wrap">
+                  <div class="ai-score-ring">
+                    <svg viewBox="0 0 80 80">
+                      <circle class="ring-bg"   cx="40" cy="40" r="33" />
+                      <circle class="ring-fill" id="ring-fill" cx="40" cy="40" r="33"
+                        stroke-dasharray="207.3" stroke-dashoffset="207.3" />
+                    </svg>
+                    <div class="ring-inner">
+                      <span class="ring-score" id="ring-score">—</span>
+                      <span class="ring-label">/ 100</span>
+                    </div>
+                  </div>
+                  <div class="ai-score-caption" id="ring-caption"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="section-label">患者情報</div>
+                <div class="summary-kv" id="summary-kv"></div>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -562,7 +508,7 @@
       <div class="alert-list">
         <div class="alert-item warn">
           <i class="alert-icon">🟡</i>
-          <div class="alert-text"><strong>未確認の治療計画が3件あります</strong><br>患者同意を確認してください</div>
+          <div class="alert-text"><strong>同意待ちの患者が2名います</strong><br>フォローアップを行ってください</div>
         </div>
         <div class="alert-item ok">
           <i class="alert-icon">🟢</i>
@@ -570,7 +516,7 @@
         </div>
         <div class="alert-item warn">
           <i class="alert-icon">🟡</i>
-          <div class="alert-text"><strong>#1103 フォロー期限</strong><br>明日までに患者へ連絡</div>
+          <div class="alert-text"><strong>#1103 追加質問あり</strong><br>明日までに患者へ連絡</div>
         </div>
         <div class="alert-item ok">
           <i class="alert-icon">🟢</i>
@@ -583,6 +529,275 @@
 </div>
 
 <script>
+  /* ===== STEP DEFINITIONS ===== */
+  const STEPS = ['初診完了', '精密検査', '計画作成', '計画説明', '同意待ち', '同意取得', '治療開始'];
+
+  /* ===== PATIENT DATA ===== */
+  const patients = [
+    {
+      id: '#1042', name: '田村 健一', age: 58, gender: '男性',
+      treatment: 'インプラント（上顎2本）', doctor: '田中 先生',
+      stepIndex: 5, aiScore: 92, nextVisit: '2026-05-03',
+      reminders: [
+        { type: 'normal', icon: '📋', title: '術前血液検査の結果を確認', body: 'HbA1c・血糖値の最新値を確認してから手術日程を確定すること', date: '2026-05-02まで' },
+        { type: 'normal', icon: '📅', title: '次回来院日：5月3日（日）', body: '術前最終確認アポイント。患者に確認済み', date: '' },
+        { type: 'caution', icon: '⚠️', title: '禁煙指導の継続を推奨', body: '喫煙が続いている場合は術後リスクについて再度説明すること', date: '' }
+      ],
+      summary: [
+        { key: '性別', val: '男性', cls: '' },
+        { key: '主訴', val: '上顎臼歯部欠損', cls: '' },
+        { key: '全身疾患', val: '2型糖尿病（管理中）', cls: 'warn' },
+        { key: '同意書', val: '署名済み', cls: 'ok' }
+      ]
+    },
+    {
+      id: '#1087', name: '鈴木 美咲', age: 32, gender: '女性',
+      treatment: 'マウスピース矯正', doctor: '山田 先生',
+      stepIndex: 6, aiScore: 88, nextVisit: '2026-05-08',
+      reminders: [
+        { type: 'normal', icon: '📦', title: '第2アライナーへの交換', body: '5月8日の来院時に第2ステージへ移行。患者に装着時間記録を持参させること', date: '2026-05-08' },
+        { type: 'normal', icon: '💡', title: 'ホワイトニング並行の検討', body: '患者より要望あり。矯正完了後のタイミングで提案する', date: '' }
+      ],
+      summary: [
+        { key: '性別', val: '女性', cls: '' },
+        { key: '主訴', val: '歯列不正（前歯部叢生）', cls: '' },
+        { key: '全身疾患', val: 'なし', cls: 'ok' },
+        { key: '同意書', val: '署名済み', cls: 'ok' }
+      ]
+    },
+    {
+      id: '#1103', name: '中村 浩二', age: 45, gender: '男性',
+      treatment: '根管治療＋クラウン', doctor: '田中 先生',
+      stepIndex: 4, aiScore: 74, nextVisit: '2026-05-05',
+      reminders: [
+        { type: 'urgent', icon: '🔴', title: '【要対応】患者から追加質問あり', body: '「抜歯との違いをもっと詳しく聞きたい」との連絡あり。5月2日までに電話フォローを実施すること', date: '2026-05-02まで（期限）' },
+        { type: 'caution', icon: '⚠️', title: 'AIスコア低下の要因を確認', body: '根管石灰化による難易度上昇でスコアが下がっている。代替案（抜歯＋インプラント）の提示準備を', date: '' }
+      ],
+      summary: [
+        { key: '性別', val: '男性', cls: '' },
+        { key: '主訴', val: '上顎犬歯の歯痛・根尖病変', cls: '' },
+        { key: '全身疾患', val: 'なし', cls: 'ok' },
+        { key: '同意書', val: '未署名（要フォロー）', cls: 'bad' }
+      ]
+    },
+    {
+      id: '#1115', name: '山田 花子', age: 28, gender: '女性',
+      treatment: 'ホワイトニング（オフィス）', doctor: '鈴木 先生',
+      stepIndex: 6, aiScore: 95, nextVisit: '2026-05-14',
+      reminders: [
+        { type: 'normal', icon: '📅', title: '次回施術日：5月14日', body: '2回目のオフィスホワイトニング。ホームケアキットの使用状況を確認すること', date: '2026-05-14' },
+        { type: 'normal', icon: '📋', title: 'ホームケアキット渡し済み', body: '施術後の食事制限・注意事項の再確認を行うこと', date: '' }
+      ],
+      summary: [
+        { key: '性別', val: '女性', cls: '' },
+        { key: '主訴', val: '歯の着色・審美改善', cls: '' },
+        { key: '全身疾患', val: 'なし', cls: 'ok' },
+        { key: '同意書', val: '署名済み', cls: 'ok' }
+      ]
+    },
+    {
+      id: '#1121', name: '伊藤 健太', age: 52, gender: '男性',
+      treatment: '歯周病治療（SRP）', doctor: '山田 先生',
+      stepIndex: 3, aiScore: 70, nextVisit: '2026-05-06',
+      reminders: [
+        { type: 'urgent', icon: '🔴', title: '【要対応】禁煙指導の実施', body: '喫煙習慣あり。SRPの効果が著しく低下するため、次回来院時に禁煙外来の紹介を検討', date: '次回来院時' },
+        { type: 'caution', icon: '⚠️', title: '同意書の取得を予定', body: '5月6日の来院時に歯周外科（フラップ）への移行可能性を含めた同意書を取得する', date: '2026-05-06' },
+        { type: 'normal', icon: '📋', title: 'ポケット検査の再評価', body: '4回のSRP完了後に再度ポケット深度を計測し、外科判断を行う', date: '' }
+      ],
+      summary: [
+        { key: '性別', val: '男性', cls: '' },
+        { key: '主訴', val: '歯肉出血・歯の動揺', cls: '' },
+        { key: '全身疾患', val: '高血圧（内服中）・喫煙', cls: 'warn' },
+        { key: '同意書', val: '一部未取得', cls: 'warn' }
+      ]
+    },
+    {
+      id: '#1134', name: '加藤 幸子', age: 68, gender: '女性',
+      treatment: '部分床義歯製作', doctor: '田中 先生',
+      stepIndex: 4, aiScore: 68, nextVisit: '2026-05-05',
+      reminders: [
+        { type: 'caution', icon: '⚠️', title: '家族同席での再説明を希望', body: '患者本人より長男の同席を希望。5月5日の来院に長男が同席する予定。費用・管理方法を再説明すること', date: '2026-05-05' },
+        { type: 'normal', icon: '💡', title: 'インプラントとの比較説明', body: '患者が「入れ歯以外の方法はないか」と質問。インプラントの適応可否（骨量）を確認し、選択肢として提示する', date: '' }
+      ],
+      summary: [
+        { key: '性別', val: '女性', cls: '' },
+        { key: '主訴', val: '下顎臼歯部欠損・咀嚼困難', cls: '' },
+        { key: '全身疾患', val: '骨粗鬆症（薬剤服用中）', cls: 'warn' },
+        { key: '同意書', val: '未署名', cls: 'bad' }
+      ]
+    },
+    {
+      id: '#1148', name: '渡辺 大介', age: 41, gender: '男性',
+      treatment: '審美補綴（ラミネートベニア）', doctor: '鈴木 先生',
+      stepIndex: 5, aiScore: 91, nextVisit: '2026-05-12',
+      reminders: [
+        { type: 'normal', icon: '🎨', title: '色調サンプル選択済み（A2）', body: 'VITAシェードガイドA2に決定。技工指示書に記載済み。製作期間は約2週間', date: '' },
+        { type: 'normal', icon: '📅', title: '装着日：5月12日予定', body: '仮歯への違和感がないか事前に確認連絡を行うこと', date: '2026-05-10頃に連絡' }
+      ],
+      summary: [
+        { key: '性別', val: '男性', cls: '' },
+        { key: '主訴', val: '前歯の審美改善', cls: '' },
+        { key: '全身疾患', val: 'なし', cls: 'ok' },
+        { key: '同意書', val: '署名済み', cls: 'ok' }
+      ]
+    },
+    {
+      id: '#1162', name: '小林 真一', age: 60, gender: '男性',
+      treatment: '全顎義歯（総義歯）', doctor: '田中 先生',
+      stepIndex: 1, aiScore: 55, nextVisit: '2026-05-07',
+      reminders: [
+        { type: 'normal', icon: '🩻', title: 'CT撮影予約済み（5月7日）', body: '顎堤の吸収度・骨量確認のため撮影予定。結果をもとに義歯 vs インプラントオーバーデンチャーの判断を行う', date: '2026-05-07' },
+        { type: 'caution', icon: '⚠️', title: '義歯経験なし・不安が強い', body: '患者は義歯を初めて使用する。「違和感が強くて使えないかも」という不安あり。心理的サポートを含めた説明を丁寧に行うこと', date: '' }
+      ],
+      summary: [
+        { key: '性別', val: '男性', cls: '' },
+        { key: '主訴', val: '全歯欠損・義歯希望', cls: '' },
+        { key: '全身疾患', val: '高血圧・脂質異常症', cls: 'warn' },
+        { key: '同意書', val: '未取得（検査後に説明）', cls: 'warn' }
+      ]
+    },
+    {
+      id: '#1175', name: '松本 愛子', age: 35, gender: '女性',
+      treatment: '矯正治療（ブラケット）', doctor: '山田 先生',
+      stepIndex: 2, aiScore: 80, nextVisit: '2026-05-09',
+      reminders: [
+        { type: 'normal', icon: '📐', title: 'セファロ分析結果を確認中', body: '頭部X線規格写真の分析が完了次第、治療計画を確定する。抜歯の要否はAI分析中', date: '結果待ち' },
+        { type: 'caution', icon: '⚠️', title: '抜歯の要否を患者に事前説明', body: '「歯を抜きたくない」との希望が強い。非抜歯矯正の可否・限界についてデータをもとに丁寧に説明する準備をすること', date: '2026-05-09来院時' }
+      ],
+      summary: [
+        { key: '性別', val: '女性', cls: '' },
+        { key: '主訴', val: '叢生・口元の突出感', cls: '' },
+        { key: '全身疾患', val: 'なし', cls: 'ok' },
+        { key: '同意書', val: '計画確定後に取得予定', cls: 'warn' }
+      ]
+    },
+    {
+      id: '#1189', name: '佐藤 翔太', age: 14, gender: '男性',
+      treatment: '小児矯正（マウスピース）', doctor: '山田 先生',
+      stepIndex: 0, aiScore: 82, nextVisit: '2026-05-06',
+      reminders: [
+        { type: 'normal', icon: '👨‍👩‍👦', title: '次回は保護者（母）と来院', body: '5月6日アポイント。X線分析結果をもとに治療方針の初回説明を実施。保護者の理解と協力が不可欠', date: '2026-05-06' },
+        { type: 'normal', icon: '🩻', title: 'X線撮影結果をAI分析中', body: 'パノラマ・セファロの分析が完了次第、治療計画の初案を作成する', date: '分析中' },
+        { type: 'caution', icon: '⚠️', title: '学校行事との調整が必要', body: '部活・定期試験の時期を保護者に確認し、無理のない通院スケジュールを組むこと', date: '' }
+      ],
+      summary: [
+        { key: '性別', val: '男性', cls: '' },
+        { key: '主訴', val: '叢生・噛み合わせの不正', cls: '' },
+        { key: '全身疾患', val: 'なし', cls: 'ok' },
+        { key: '同意書', val: '初診のみ取得済み', cls: 'warn' }
+      ]
+    }
+  ];
+
+  /* ===== BUILD TABLE ===== */
+  const statusLabel = [
+    { text: '初診完了', cls: 'tag-muted' },
+    { text: '精密検査', cls: 'tag-info' },
+    { text: '計画作成', cls: 'tag-info' },
+    { text: '計画説明', cls: 'tag-warn' },
+    { text: '同意待ち', cls: 'tag-warn' },
+    { text: '同意取得', cls: 'tag-ok' },
+    { text: '治療開始', cls: 'tag-ok' }
+  ];
+
+  const tbody = document.getElementById('patient-tbody');
+  patients.forEach(function(p, i) {
+    const sl = statusLabel[p.stepIndex];
+    const scoreClass = p.aiScore >= 85 ? 'tag-ok' : p.aiScore >= 70 ? 'tag-warn' : 'tag-bad';
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + p.id + '</td>' +
+      '<td style="color:var(--text-main);font-weight:600">' + p.name + '</td>' +
+      '<td>' + p.age + '歳</td>' +
+      '<td>' + p.treatment + '</td>' +
+      '<td>' + p.doctor + '</td>' +
+      '<td><span class="tag ' + sl.cls + '">' + sl.text + '</span></td>' +
+      '<td><span class="tag ' + scoreClass + '">' + p.aiScore + ' / 100</span></td>' +
+      '<td>' + p.nextVisit + '</td>';
+    tr.addEventListener('click', function() { selectPatient(i); });
+    tbody.appendChild(tr);
+  });
+
+  /* ===== SELECT PATIENT ===== */
+  var selectedRow = null;
+
+  function selectPatient(idx) {
+    const p = patients[idx];
+
+    // Row highlight
+    if (selectedRow) selectedRow.classList.remove('selected');
+    selectedRow = tbody.rows[idx];
+    selectedRow.classList.add('selected');
+
+    // Header
+    document.getElementById('d-name').textContent = p.name;
+    document.getElementById('d-meta').textContent = p.id + '　' + p.age + '歳　' + p.gender;
+    document.getElementById('d-treatment').textContent = p.treatment;
+    document.getElementById('d-doctor').textContent = '担当：' + p.doctor;
+    const sl = statusLabel[p.stepIndex];
+    document.getElementById('d-status-badge').innerHTML = '<span class="tag ' + sl.cls + '" style="font-size:11px;padding:3px 10px">' + sl.text + '</span>';
+
+    // Stepper
+    const stepperEl = document.getElementById('stepper');
+    stepperEl.innerHTML = '';
+    STEPS.forEach(function(label, si) {
+      const stepEl = document.createElement('div');
+      let cls = 'step';
+      if (si < p.stepIndex) cls += ' done';
+      else if (si === p.stepIndex) cls += ' current';
+      stepEl.className = cls;
+      stepEl.innerHTML =
+        '<div class="step-dot">' + (si < p.stepIndex ? '✓' : (si + 1)) + '</div>' +
+        '<div class="step-label">' + label + '</div>';
+      stepperEl.appendChild(stepEl);
+    });
+    document.getElementById('step-badge').innerHTML =
+      '現在のステージ：<strong>' + STEPS[p.stepIndex] + '</strong>';
+
+    // Reminders
+    const remList = document.getElementById('reminder-list');
+    remList.innerHTML = '';
+    p.reminders.forEach(function(r) {
+      const el = document.createElement('div');
+      el.className = 'reminder-item' + (r.type !== 'normal' ? ' ' + r.type : '');
+      el.innerHTML =
+        '<div class="reminder-icon">' + r.icon + '</div>' +
+        '<div>' +
+          '<div class="reminder-text"><strong>' + r.title + '</strong><br>' + r.body + '</div>' +
+          (r.date ? '<div class="reminder-date">📅 ' + r.date + '</div>' : '') +
+        '</div>';
+      remList.appendChild(el);
+    });
+
+    // AI Score ring
+    const score = p.aiScore;
+    const circ = 207.3;
+    const offset = circ - (circ * score / 100);
+    const ringFill = document.getElementById('ring-fill');
+    ringFill.style.strokeDashoffset = circ;
+    ringFill.style.stroke = score >= 85 ? 'var(--ok2)' : score >= 70 ? 'var(--warn)' : 'var(--danger)';
+    setTimeout(function() { ringFill.style.strokeDashoffset = offset; }, 50);
+    document.getElementById('ring-score').textContent = score;
+    document.getElementById('ring-caption').textContent =
+      score >= 85 ? '合意形成の可能性：高' : score >= 70 ? '追加説明を推奨' : '代替案の提示を検討';
+
+    // Summary KV
+    const kvEl = document.getElementById('summary-kv');
+    kvEl.innerHTML = '';
+    p.summary.forEach(function(s) {
+      kvEl.innerHTML +=
+        '<div class="summary-row">' +
+          '<div class="summary-key">' + s.key + '</div>' +
+          '<div class="summary-val ' + s.cls + '">' + s.val + '</div>' +
+        '</div>';
+    });
+
+    // Show & scroll
+    const dv = document.getElementById('detail-view');
+    dv.classList.add('visible');
+    dv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
   function toggleSidebar() {
     document.getElementById('sidebar').classList.toggle('open');
     document.getElementById('overlay').classList.toggle('open');

@@ -520,9 +520,80 @@
         border-top: none;
       }
     }
+
+    /* ===== LOADING OVERLAY ===== */
+    #loadingOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 10, 22, 0.88);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .loading-content {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      background: #0d2240;
+      border: 1px solid #1e4070;
+      border-radius: 14px;
+      padding: 36px 44px;
+      box-shadow: 0 8px 50px rgba(0,0,0,.6), 0 0 40px rgba(0,200,215,.08);
+    }
+    .loading-image {
+      width: 110px;
+      border-radius: 8px;
+      opacity: .92;
+    }
+    .loading-text {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: .05em;
+      margin-bottom: 16px;
+    }
+    .progress-bar {
+      width: 380px;
+      height: 8px;
+      background: #112030;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #1e4070;
+    }
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      border-radius: 10px;
+      transition: width 0.25s ease;
+      box-shadow: 0 0 8px rgba(0,200,215,.5);
+    }
+    .loading-sub {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: .06em;
+    }
   </style>
 </head>
 <body>
+
+<!-- Loading overlay -->
+<div id="loadingOverlay">
+  <div class="loading-content">
+    <img src="ss.png" class="loading-image" alt="analyzing">
+    <div>
+      <div class="loading-text">Now Analyzing...</div>
+      <div class="progress-bar">
+        <div class="progress" id="progressBar"></div>
+      </div>
+      <div class="loading-sub" id="loadingSub">Analyzing Document Data...</div>
+    </div>
+  </div>
+</div>
+
 <div class="app">
 
   <!-- Top bar -->
@@ -828,6 +899,45 @@
     drawer.classList.toggle('open');
     arrow.textContent = drawer.classList.contains('open') ? '▲' : '▼';
   }
+
+  // Loading overlay
+  const subMessages = [
+    'Analyzing Document Data...',
+    'Loading Patient Records...',
+    'Calculating Management Score...',
+    'Syncing Dashboard Data...',
+    'Finalizing Report...'
+  ];
+  window.addEventListener('load', function() {
+    const bar = document.getElementById('progressBar');
+    const sub = document.getElementById('loadingSub');
+    let width = 0;
+    let msgIdx = 0;
+
+    const interval = setInterval(function() {
+      width += Math.random() * 12 + 4;
+
+      if (width >= 100) {
+        width = 100;
+        bar.style.width = '100%';
+        sub.textContent = 'Complete!';
+        clearInterval(interval);
+        setTimeout(function() {
+          const overlay = document.getElementById('loadingOverlay');
+          overlay.style.transition = 'opacity .4s ease';
+          overlay.style.opacity = '0';
+          setTimeout(function() { overlay.style.display = 'none'; }, 420);
+        }, 350);
+      } else {
+        bar.style.width = width + '%';
+        const newIdx = Math.floor(width / 25);
+        if (newIdx !== msgIdx && newIdx < subMessages.length) {
+          msgIdx = newIdx;
+          sub.textContent = subMessages[msgIdx];
+        }
+      }
+    }, 400);
+  });
 </script>
 </body>
 </html>
