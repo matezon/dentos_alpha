@@ -33,349 +33,263 @@
       font-size: 14px;
     }
 
-    .app {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+    .app { display: flex; flex-direction: column; min-height: 100vh; }
 
+    /* ===== TOPBAR ===== */
     .topbar {
-      display: flex;
-      align-items: center;
+      display: flex; align-items: center;
       background: #061020;
       border-bottom: 1px solid var(--border);
-      height: 48px;
-      padding: 0 16px;
-      flex-shrink: 0;
-      gap: 0;
-      z-index: 100;
+      height: 48px; padding: 0 16px;
+      flex-shrink: 0; gap: 0; z-index: 100;
     }
-    .topbar-logo {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: .06em;
-      white-space: nowrap;
-    }
-    .topbar-sep {
-      width: 1px;
-      height: 22px;
-      background: var(--border);
-      margin: 0 14px;
-      flex-shrink: 0;
-    }
-    .topbar-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text-main);
-      letter-spacing: .04em;
-    }
-    .topbar-tabs {
-      display: flex;
-      gap: 4px;
-      margin-left: auto;
-    }
+    .topbar-logo { font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: .06em; white-space: nowrap; }
+    .topbar-sep { width: 1px; height: 22px; background: var(--border); margin: 0 14px; flex-shrink: 0; }
+    .topbar-title { font-size: 15px; font-weight: 700; color: var(--text-main); letter-spacing: .04em; }
+    .topbar-tabs { display: flex; gap: 4px; margin-left: auto; }
     .topbar-tab {
-      font-size: 12px;
-      color: var(--text-muted);
-      padding: 4px 12px;
-      border-radius: 3px;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: all .2s;
-      text-decoration: none;
+      font-size: 12px; color: var(--text-muted);
+      padding: 4px 12px; border-radius: 3px; cursor: pointer;
+      border: 1px solid transparent; transition: all .2s; text-decoration: none;
     }
     .topbar-tab:hover, .topbar-tab.active {
-      color: var(--accent);
-      border-color: var(--accent2);
-      background: rgba(0,200,215,.07);
+      color: var(--accent); border-color: var(--accent2); background: rgba(0,200,215,.07);
     }
     .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      cursor: pointer;
-      padding: 6px;
-      margin-left: auto;
+      display: none; flex-direction: column; gap: 4px;
+      cursor: pointer; padding: 6px; margin-left: auto;
     }
-    .hamburger span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--text-main);
-      border-radius: 2px;
-    }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-main); border-radius: 2px; }
 
-    .body-row {
-      display: flex;
-      flex: 1;
-      min-height: 0;
-      overflow: hidden;
-    }
+    /* ===== BODY ROW ===== */
+    .body-row { display: flex; flex: 1; min-height: 0; overflow: hidden; }
 
+    /* ===== SIDEBAR ===== */
     .sidebar {
-      width: var(--sidebar-w);
-      background: var(--bg-sidebar);
+      width: var(--sidebar-w); background: var(--bg-sidebar);
       border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
-      overflow-y: auto;
-      transition: transform .28s ease;
+      display: flex; flex-direction: column; flex-shrink: 0;
+      overflow-y: auto; transition: transform .28s ease;
     }
     .sidebar-group { padding: 14px 0 6px; }
     .sidebar-group-label {
-      font-size: 9px;
-      letter-spacing: .12em;
-      color: var(--text-muted);
-      padding: 0 16px 6px;
-      text-transform: uppercase;
+      font-size: 9px; letter-spacing: .12em; color: var(--text-muted);
+      padding: 0 16px 6px; text-transform: uppercase;
     }
     .sidebar-item {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      padding: 9px 16px;
-      font-size: 12.5px;
-      color: var(--text-label);
-      cursor: pointer;
-      border-left: 3px solid transparent;
-      transition: all .18s;
-      text-decoration: none;
+      display: flex; align-items: center; gap: 9px;
+      padding: 9px 16px; font-size: 12.5px; color: var(--text-label);
+      cursor: pointer; border-left: 3px solid transparent;
+      transition: all .18s; text-decoration: none;
     }
     .sidebar-item:hover { background: rgba(0,200,215,.06); color: var(--text-main); }
-    .sidebar-item.active {
-      color: var(--accent);
-      border-left-color: var(--accent);
-      background: rgba(0,200,215,.1);
-    }
-    .sidebar-icon {
-      width: 16px;
-      text-align: center;
-      font-style: normal;
-      font-size: 14px;
-    }
+    .sidebar-item.active { color: var(--accent); border-left-color: var(--accent); background: rgba(0,200,215,.1); }
+    .sidebar-icon { width: 16px; text-align: center; font-style: normal; font-size: 14px; }
 
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-      overflow-y: auto;
-    }
+    /* ===== MAIN ===== */
+    .main { flex: 1; display: flex; flex-direction: column; min-width: 0; overflow-y: auto; }
     .main-inner {
       padding: 20px 20px 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      min-height: 100%;
+      display: flex; flex-direction: column; gap: 16px; min-height: 100%;
     }
 
-    .page-heading {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-    }
-    .page-heading h1 {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: .06em;
-    }
-    .page-heading .subtitle {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
+    .page-heading { display: flex; align-items: baseline; gap: 10px; }
+    .page-heading h1 { font-size: 20px; font-weight: 700; letter-spacing: .06em; }
+    .page-heading .subtitle { font-size: 11px; color: var(--text-muted); }
 
-    /* ページ固有スタイル */
-    .content-card {
+    /* ===== PATIENT LIST TABLE ===== */
+    .list-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 20px 22px;
-    }
-    .content-card-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: .04em;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .content-card-body {
-      color: var(--text-label);
-      font-size: 12.5px;
-      line-height: 1.7;
-    }
-
-    .status-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-    .status-item {
-      background: var(--bg-card2);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 14px 16px;
-    }
-    .status-item-label {
-      font-size: 10px;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-      letter-spacing: .03em;
-    }
-    .status-item-value {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--text-main);
-    }
-    .status-item-value.ok   { color: var(--ok2); }
-    .status-item-value.warn { color: var(--warn); }
-    .status-item-value.bad  { color: var(--danger); }
-
-    .risk-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 12px;
-    }
-    .risk-table th {
-      background: rgba(0,200,215,.08);
-      color: var(--accent);
-      font-weight: 600;
-      padding: 8px 12px;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-      letter-spacing: .04em;
-    }
-    .risk-table td {
-      padding: 9px 12px;
-      color: var(--text-label);
-      border-bottom: 1px solid rgba(22,48,80,.5);
-    }
-    .risk-table tr:last-child td { border-bottom: none; }
-    .risk-table tr:hover td { background: rgba(0,200,215,.04); }
-
-    .tag {
-      display: inline-block;
-      font-size: 9.5px;
-      padding: 2px 8px;
-      border-radius: 10px;
-      font-weight: 600;
-      letter-spacing: .03em;
-    }
-    .tag-ok    { background: rgba(48,200,117,.15); color: var(--ok2); border: 1px solid rgba(48,200,117,.3); }
-    .tag-warn  { background: rgba(240,160,0,.12); color: var(--warn); border: 1px solid rgba(240,160,0,.3); }
-    .tag-bad   { background: rgba(232,64,64,.12); color: var(--danger); border: 1px solid rgba(232,64,64,.3); }
-    .tag-info  { background: rgba(0,200,215,.1); color: var(--accent); border: 1px solid rgba(0,200,215,.25); }
-
-    /* Risk level bar */
-    .risk-bar-wrap {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .risk-bar-bg {
-      flex: 1;
-      height: 6px;
-      background: var(--bg-base);
-      border-radius: 3px;
       overflow: hidden;
     }
-    .risk-bar-fill {
-      height: 100%;
-      border-radius: 3px;
+    .list-card-header {
+      padding: 12px 16px;
+      font-size: 12px; font-weight: 700; color: var(--accent);
+      letter-spacing: .04em;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 8px;
     }
-    .risk-bar-fill.low  { background: var(--ok2); }
-    .risk-bar-fill.mid  { background: var(--warn); }
-    .risk-bar-fill.high { background: var(--danger); }
+    .patient-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .patient-table th {
+      background: rgba(0,200,215,.06);
+      color: var(--text-muted); font-weight: 600;
+      padding: 8px 14px; text-align: left;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: .04em; font-size: 10.5px;
+    }
+    .patient-table td {
+      padding: 10px 14px; color: var(--text-label);
+      border-bottom: 1px solid rgba(22,48,80,.45);
+    }
+    .patient-table tbody tr:last-child td { border-bottom: none; }
+    .patient-table tbody tr {
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .patient-table tbody tr:hover td { background: rgba(0,200,215,.06); color: var(--text-main); }
+    .patient-table tbody tr.selected td {
+      background: rgba(0,200,215,.12);
+      color: var(--text-main);
+    }
+    .patient-table tbody tr.selected td:first-child {
+      border-left: 3px solid var(--accent);
+    }
 
-    /* Right panel */
-    .right-panel {
-      width: 240px;
-      background: var(--bg-sidebar);
-      border-left: 1px solid var(--border);
-      display: flex;
+    .tag {
+      display: inline-block; font-size: 9.5px;
+      padding: 2px 8px; border-radius: 10px;
+      font-weight: 600; letter-spacing: .03em;
+    }
+    .tag-ok   { background: rgba(48,200,117,.15); color: var(--ok2);   border: 1px solid rgba(48,200,117,.3); }
+    .tag-warn { background: rgba(240,160,0,.12);  color: var(--warn);  border: 1px solid rgba(240,160,0,.3); }
+    .tag-bad  { background: rgba(232,64,64,.12);  color: var(--danger); border: 1px solid rgba(232,64,64,.3); }
+
+    /* ===== DETAIL VIEW ===== */
+    .detail-view {
+      display: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
       flex-direction: column;
-      flex-shrink: 0;
+    }
+    .detail-view.visible { display: flex; }
+
+    .detail-header {
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(0,200,215,.05);
+    }
+    .detail-patient-id { font-size: 11px; color: var(--text-muted); }
+    .detail-patient-name { font-size: 15px; font-weight: 700; color: var(--text-main); }
+    .detail-treatment { font-size: 12px; color: var(--accent); margin-left: 4px; }
+    .detail-risk-badge { margin-left: auto; }
+
+    .detail-body {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      min-height: 340px;
+    }
+
+    /* Left: IC content */
+    .ic-panel {
+      padding: 18px 20px;
+      border-right: 1px solid var(--border);
       overflow-y: auto;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .ic-section-title {
+      font-size: 10.5px; font-weight: 700;
+      color: var(--accent); letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .ic-section-title::after {
+      content: '';
+      flex: 1; height: 1px;
+      background: rgba(0,200,215,.2);
+    }
+    .ic-items { display: flex; flex-direction: column; gap: 5px; }
+    .ic-item {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 12px; color: var(--text-label); line-height: 1.55;
+    }
+    .ic-item::before {
+      content: '▸';
+      color: var(--accent2); font-size: 10px;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .ic-item.warn-item { color: var(--warn); }
+    .ic-item.warn-item::before { color: var(--warn); content: '⚠'; }
+
+    /* Right: photo */
+    .photo-panel {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 18px 16px; gap: 10px;
+      background: #060e1a;
+    }
+    .photo-panel-label {
+      font-size: 10px; color: var(--text-muted);
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+    .oral-photo {
+      width: 100%; max-width: 240px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      object-fit: cover;
+      display: block;
+    }
+    .photo-caption {
+      font-size: 10px; color: var(--text-muted);
+      text-align: center; line-height: 1.4;
+    }
+
+    /* ===== RIGHT PANEL ===== */
+    .right-panel {
+      width: 240px; background: var(--bg-sidebar);
+      border-left: 1px solid var(--border);
+      display: flex; flex-direction: column; flex-shrink: 0; overflow-y: auto;
     }
     .right-panel-header {
-      padding: 14px 16px 10px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--accent);
-      border-bottom: 1px solid var(--border);
-      letter-spacing: .04em;
+      padding: 14px 16px 10px; font-size: 12px; font-weight: 700;
+      color: var(--accent); border-bottom: 1px solid var(--border); letter-spacing: .04em;
     }
     .alert-list { display: flex; flex-direction: column; padding: 10px 0; }
     .alert-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      padding: 8px 16px;
-      font-size: 11px;
+      display: flex; align-items: flex-start; gap: 8px;
+      padding: 8px 16px; font-size: 11px;
       border-bottom: 1px solid rgba(22,48,80,.6);
-      line-height: 1.45;
-      transition: background .15s;
+      line-height: 1.45; transition: background .15s;
     }
     .alert-item:hover { background: rgba(0,200,215,.04); }
     .alert-icon { flex-shrink: 0; margin-top: 1px; font-style: normal; font-size: 13px; }
     .alert-text { color: var(--text-label); }
     .alert-text strong { color: var(--text-main); font-weight: 600; }
-    .alert-item.warn .alert-icon { color: var(--warn); }
+    .alert-item.warn .alert-icon   { color: var(--warn); }
     .alert-item.danger .alert-icon { color: var(--danger); }
-    .alert-item.ok .alert-icon { color: var(--ok); }
+    .alert-item.ok .alert-icon     { color: var(--ok); }
 
+    /* Mobile alert drawer */
     .alert-drawer-toggle {
-      display: none;
-      align-items: center;
-      gap: 8px;
-      background: #0b1a2e;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 10px 14px;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--accent);
-      width: 100%;
-      text-align: left;
+      display: none; align-items: center; gap: 8px;
+      background: #0b1a2e; border: 1px solid var(--border); border-radius: 6px;
+      padding: 10px 14px; cursor: pointer; font-size: 12px;
+      font-weight: 600; color: var(--accent); width: 100%; text-align: left;
     }
 
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
       .right-panel { display: none; }
-      .status-grid { grid-template-columns: repeat(2, 1fr); }
       .topbar-tabs { display: none; }
       .hamburger { display: flex; }
       .alert-drawer-toggle { display: flex; }
       .alert-drawer { display: none; }
       .alert-drawer.open {
-        display: block;
-        background: var(--bg-sidebar);
-        border: 1px solid var(--border);
-        border-radius: 0 0 6px 6px;
-        border-top: none;
+        display: block; background: var(--bg-sidebar);
+        border: 1px solid var(--border); border-radius: 0 0 6px 6px; border-top: none;
       }
+    }
+    @media (max-width: 900px) {
+      .detail-body { grid-template-columns: 1fr; }
+      .ic-panel { border-right: none; border-bottom: 1px solid var(--border); }
+      .photo-panel { min-height: 200px; }
     }
     @media (max-width: 768px) {
       .sidebar {
-        position: fixed;
-        top: 48px; left: 0; bottom: 0;
-        z-index: 200;
-        transform: translateX(-100%);
+        position: fixed; top: 48px; left: 0; bottom: 0;
+        z-index: 200; transform: translateX(-100%);
       }
       .sidebar.open { transform: translateX(0); }
       .sidebar-overlay {
-        display: none;
-        position: fixed;
-        inset: 0; top: 48px;
-        background: rgba(0,0,0,.5);
-        z-index: 199;
+        display: none; position: fixed; inset: 0; top: 48px;
+        background: rgba(0,0,0,.5); z-index: 199;
       }
       .sidebar-overlay.open { display: block; }
-      .status-grid { grid-template-columns: 1fr 1fr; }
       .main-inner { padding: 14px 12px 24px; }
       .page-heading h1 { font-size: 17px; }
     }
@@ -389,7 +303,7 @@
     <div class="topbar-sep"></div>
     <span class="topbar-title">IC防衛 — リスク・ディフェンダー</span>
     <nav class="topbar-tabs">
-      <a class="topbar-tab" href="index.html">ダッシュボード</a>
+      <a class="topbar-tab" href="president.html">ダッシュボード</a>
       <span class="topbar-tab active">IC防衛</span>
       <span class="topbar-tab">設定</span>
     </nav>
@@ -405,7 +319,7 @@
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-group">
         <div class="sidebar-group-label">受付・初診</div>
-        <a class="sidebar-item" href="index.html">
+        <a class="sidebar-item" href="president.html">
           <i class="sidebar-icon">🔗</i>ゼロ・インテーク
         </a>
       </div>
@@ -451,7 +365,7 @@
           <span class="subtitle">インフォームドコンセント リスク管理 — 2026年4月</span>
         </div>
 
-        <!-- Alert drawer (mobile/tablet) -->
+        <!-- Mobile alert drawer -->
         <div>
           <button class="alert-drawer-toggle" onclick="toggleAlerts()">
             ⚠ アラート＆リマインド <span id="alert-arrow">▼</span>
@@ -470,138 +384,44 @@
           </div>
         </div>
 
-        <!-- Status summary -->
-        <div class="status-grid">
-          <div class="status-item">
-            <div class="status-item-label">今月の対応件数</div>
-            <div class="status-item-value ok">38<span style="font-size:12px;font-weight:400;color:var(--text-muted)"> 件</span></div>
+        <!-- Patient list -->
+        <div class="list-card">
+          <div class="list-card-header">
+            🛡️ 患者一覧 — 患者を選択するとIC説明内容を表示します
           </div>
-          <div class="status-item">
-            <div class="status-item-label">高リスク（要即対応）</div>
-            <div class="status-item-value bad">2<span style="font-size:12px;font-weight:400;color:var(--text-muted)"> 件</span></div>
-          </div>
-          <div class="status-item">
-            <div class="status-item-label">IC書類完備率</div>
-            <div class="status-item-value ok">94<span style="font-size:12px;font-weight:400;color:var(--text-muted)">%</span></div>
-          </div>
-        </div>
-
-        <!-- Risk table card -->
-        <div class="content-card">
-          <div class="content-card-title">
-            <span>🛡️</span> インフォームドコンセント リスク一覧
-          </div>
-          <table class="risk-table">
+          <table class="patient-table">
             <thead>
               <tr>
                 <th>患者ID</th>
+                <th>氏名</th>
+                <th>年齢</th>
                 <th>処置内容</th>
-                <th>リスクレベル</th>
-                <th>リスク要因</th>
-                <th>IC状態</th>
                 <th>担当医</th>
-                <th>期限</th>
+                <th>リスク</th>
+                <th>IC状態</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>#2011</td>
-                <td>インプラント埋入</td>
-                <td>
-                  <div class="risk-bar-wrap">
-                    <div class="risk-bar-bg"><div class="risk-bar-fill high" style="width:90%"></div></div>
-                    <span class="tag tag-bad">高</span>
-                  </div>
-                </td>
-                <td>糖尿病・骨密度低下</td>
-                <td><span class="tag tag-bad">未署名</span></td>
-                <td>田中 先生</td>
-                <td>2026-05-02</td>
-              </tr>
-              <tr>
-                <td>#2034</td>
-                <td>全身麻酔下抜歯</td>
-                <td>
-                  <div class="risk-bar-wrap">
-                    <div class="risk-bar-bg"><div class="risk-bar-fill high" style="width:85%"></div></div>
-                    <span class="tag tag-bad">高</span>
-                  </div>
-                </td>
-                <td>高血圧・抗凝固薬服用</td>
-                <td><span class="tag tag-bad">未署名</span></td>
-                <td>山田 先生</td>
-                <td>2026-05-03</td>
-              </tr>
-              <tr>
-                <td>#2052</td>
-                <td>根管治療</td>
-                <td>
-                  <div class="risk-bar-wrap">
-                    <div class="risk-bar-bg"><div class="risk-bar-fill mid" style="width:55%"></div></div>
-                    <span class="tag tag-warn">中</span>
-                  </div>
-                </td>
-                <td>石灰化根管</td>
-                <td><span class="tag tag-warn">確認中</span></td>
-                <td>鈴木 先生</td>
-                <td>2026-05-07</td>
-              </tr>
-              <tr>
-                <td>#2068</td>
-                <td>矯正治療（ブラケット）</td>
-                <td>
-                  <div class="risk-bar-wrap">
-                    <div class="risk-bar-bg"><div class="risk-bar-fill mid" style="width:40%"></div></div>
-                    <span class="tag tag-warn">中</span>
-                  </div>
-                </td>
-                <td>歯根吸収リスク</td>
-                <td><span class="tag tag-ok">署名済</span></td>
-                <td>田中 先生</td>
-                <td>2026-05-10</td>
-              </tr>
-              <tr>
-                <td>#2079</td>
-                <td>ホワイトニング</td>
-                <td>
-                  <div class="risk-bar-wrap">
-                    <div class="risk-bar-bg"><div class="risk-bar-fill low" style="width:20%"></div></div>
-                    <span class="tag tag-ok">低</span>
-                  </div>
-                </td>
-                <td>知覚過敏の可能性</td>
-                <td><span class="tag tag-ok">署名済</span></td>
-                <td>山田 先生</td>
-                <td>2026-05-15</td>
-              </tr>
-              <tr>
-                <td>#2091</td>
-                <td>歯周外科（フラップ手術）</td>
-                <td>
-                  <div class="risk-bar-wrap">
-                    <div class="risk-bar-bg"><div class="risk-bar-fill mid" style="width:60%"></div></div>
-                    <span class="tag tag-warn">中</span>
-                  </div>
-                </td>
-                <td>喫煙・歯周病重症度</td>
-                <td><span class="tag tag-ok">署名済</span></td>
-                <td>鈴木 先生</td>
-                <td>2026-05-12</td>
-              </tr>
-            </tbody>
+            <tbody id="patient-tbody"></tbody>
           </table>
         </div>
 
-        <!-- Description card -->
-        <div class="content-card">
-          <div class="content-card-title">
-            <span>💡</span> IC防衛システムについて
+        <!-- Detail view (shown on patient select) -->
+        <div class="detail-view" id="detail-view">
+          <div class="detail-header">
+            <span class="detail-patient-id" id="d-id"></span>
+            <span class="detail-patient-name" id="d-name"></span>
+            <span class="detail-treatment" id="d-treatment"></span>
+            <span class="detail-risk-badge" id="d-risk"></span>
           </div>
-          <div class="content-card-body">
-            IC防衛（リスク・ディフェンダー）は、各患者の処置リスクをリアルタイムで評価し、
-            インフォームドコンセントの取得漏れや法的リスクを事前に検知するシステムです。<br><br>
-            <strong style="color:var(--danger)">高リスク案件</strong>は診療前に必ず担当医と院長が確認し、書面によるICを完了させてください。
-            <strong style="color:var(--warn)">中リスク</strong>の案件も期限内に署名を取得してください。
+          <div class="detail-body">
+            <!-- Left: IC content -->
+            <div class="ic-panel" id="ic-panel"></div>
+            <!-- Right: oral photo -->
+            <div class="photo-panel">
+              <div class="photo-panel-label">口腔内写真</div>
+              <img class="oral-photo" id="oral-photo" src="" alt="口腔内写真" />
+              <div class="photo-caption" id="photo-caption"></div>
+            </div>
           </div>
         </div>
 
@@ -638,6 +458,577 @@
 </div>
 
 <script>
+  /* ===== PATIENT DATA ===== */
+  const patients = [
+    {
+      id: '#2011', name: '田村 健一', age: 58,
+      treatment: 'インプラント埋入', doctor: '田中 先生',
+      risk: 'high', ic: '未署名', photo: 'mouse01.jfif',
+      ic_sections: [
+        {
+          title: '処置内容',
+          items: [
+            '上顎右側第一大臼歯部へのインプラント埋入術',
+            '手術時間：約90分（局所麻酔下）',
+            'チタン製フィクスチャーを顎骨に埋入し、上部構造（人工歯）を装着する治療'
+          ]
+        },
+        {
+          title: 'リスク・合併症（要重点説明）',
+          items: [
+            '糖尿病（HbA1c高値）による術後治癒遅延・感染リスク',
+            '骨密度低下によるオッセオインテグレーション不全（インプラント脱落）の可能性',
+            '術後の出血・腫脹・疼痛（通常1週間程度）',
+            '下顎では神経・血管損傷による知覚異常リスク（本症例は上顎）'
+          ],
+          warn: true
+        },
+        {
+          title: '術前の注意事項',
+          items: [
+            '血糖値コントロールが必須：HbA1c 7.0%未満を推奨（主治医と連携）',
+            '服用中の薬剤（血糖降下薬）の確認・休薬指示',
+            '術前の口腔衛生指導を徹底する'
+          ]
+        },
+        {
+          title: '術後の注意事項',
+          items: [
+            '抗生剤・鎮痛剤を処方通りに服用',
+            '術後24時間は安静・飲酒禁止',
+            '喫煙は治癒を著しく妨げるため禁煙を強く推奨',
+            '3〜6ヶ月のオッセオインテグレーション待機が必要'
+          ]
+        },
+        {
+          title: '代替治療法',
+          items: [
+            'ブリッジ補綴（隣接歯の切削が必要）',
+            '部分床義歯（取り外し式）',
+            'インプラントを行わず欠損部を放置（隣接歯の移動・対合歯の挺出リスクあり）'
+          ]
+        }
+      ]
+    },
+    {
+      id: '#2034', name: '中村 美智子', age: 72,
+      treatment: '全身麻酔下抜歯', doctor: '山田 先生',
+      risk: 'high', ic: '未署名', photo: 'mouse02.jpg',
+      ic_sections: [
+        {
+          title: '処置内容',
+          items: [
+            '下顎左側埋伏智歯（親知らず）の全身麻酔下抜歯',
+            '手術時間：約60分（全身麻酔科との連携）',
+            '入院が必要な場合あり（日帰り〜1泊）'
+          ]
+        },
+        {
+          title: 'リスク・合併症（要重点説明）',
+          items: [
+            '高血圧・抗凝固薬（ワーファリン）服用による出血延長リスク',
+            '全身麻酔に伴うリスク：悪性高熱症、誤嚥性肺炎、術後覚醒遅延',
+            '下歯槽神経・舌神経損傷による知覚麻痺（一時的または永続的）',
+            '術後の出血・腫脹・開口障害（2〜3週間程度）'
+          ],
+          warn: true
+        },
+        {
+          title: '術前の注意事項',
+          items: [
+            '抗凝固薬（ワーファリン）の休薬：必ず循環器内科・主治医に相談のうえ指示に従う',
+            '全身麻酔前日から絶飲食（水も禁止）',
+            '高血圧の血圧コントロール（収縮期160mmHg以下が目安）',
+            '術前の血液検査・心電図・胸部X線が必要'
+          ]
+        },
+        {
+          title: '術後の注意事項',
+          items: [
+            '術後は十分な圧迫止血を行う（30分以上）',
+            '抗生剤・鎮痛剤を処方通りに服用',
+            '術後48時間は激しい運動・入浴・飲酒を避ける',
+            '縫合糸の抜糸は術後1週間目に実施'
+          ]
+        },
+        {
+          title: '代替治療法',
+          items: [
+            '局所麻酔下での抜歯（全身状態が安定していれば検討可）',
+            '鎮静下（静脈内鎮静法）での抜歯',
+            '経過観察（症状がない場合に限り、急性炎症リスクを説明したうえで）'
+          ]
+        }
+      ]
+    },
+    {
+      id: '#2052', name: '鈴木 隆', age: 45,
+      treatment: '根管治療（石灰化根管）', doctor: '鈴木 先生',
+      risk: 'mid', ic: '確認中', photo: 'mouse03.jpg',
+      ic_sections: [
+        {
+          title: '処置内容',
+          items: [
+            '上顎左側犬歯の根管治療（石灰化により難難化症例）',
+            '複数回（3〜5回）の来院が必要',
+            'ラバーダム防湿下で実施、マイクロスコープ使用を検討'
+          ]
+        },
+        {
+          title: 'リスク・合併症',
+          items: [
+            '石灰化根管のため根管穿孔（パーフォレーション）リスクが通常より高い',
+            '根管ファイル破折（折れた器具が根管内に残留）の可能性',
+            '治療回数が増加し、治療期間が延長する可能性',
+            '根管治療の成功率：約70〜80%（石灰化症例はさらに低下する場合あり）'
+          ],
+          warn: true
+        },
+        {
+          title: '治療中の注意事項',
+          items: [
+            'ラバーダム防湿を必ず使用（薬液誤飲防止）',
+            'X線撮影を複数回行い根管の状態を確認',
+            '痛みが強い場合は局所麻酔を追加（申し出てください）'
+          ]
+        },
+        {
+          title: '治療が困難な場合の対応',
+          items: [
+            '外科的歯内療法（歯根端切除術）への移行',
+            '抜歯後インプラント・ブリッジ・義歯による補綴'
+          ]
+        },
+        {
+          title: '代替治療法',
+          items: [
+            '抜歯後インプラント治療（費用・期間が増加）',
+            '抜歯後ブリッジ（隣接歯切削を伴う）',
+            '抜歯後義歯（最もシンプル・低コスト）'
+          ]
+        }
+      ]
+    },
+    {
+      id: '#2068', name: '山田 花子', age: 32,
+      treatment: '矯正治療（ブラケット）', doctor: '田中 先生',
+      risk: 'mid', ic: '署名済', photo: 'mouse03.jpg',
+      ic_sections: [
+        {
+          title: '処置内容',
+          items: [
+            '上下顎全歯列マルチブラケット矯正',
+            '治療期間：2〜3年（個人差あり）',
+            '4〜6週間ごとの調整来院が必要'
+          ]
+        },
+        {
+          title: 'リスク・合併症',
+          items: [
+            '歯根吸収：矯正力により歯根が短縮する可能性（特に上顎前歯）',
+            'ブラケット周囲の清掃不良による虫歯・歯周病リスクの増加',
+            '矯正後の後戻り：保定装置（リテーナー）装着が必須',
+            '装置装着初期の疼痛・違和感（1〜3日程度）'
+          ],
+          warn: true
+        },
+        {
+          title: '治療中の注意事項',
+          items: [
+            '矯正専用ブラシ・フロスを使用した徹底した口腔清掃',
+            '硬い食品（氷・硬いキャンディ等）の禁止',
+            '3ヶ月ごとの定期的な歯周チェックとクリーニング',
+            'ワイヤー脱落・ブラケット外れが生じた場合は早急に連絡'
+          ]
+        },
+        {
+          title: '保定（治療終了後）',
+          items: [
+            'リテーナー（保定装置）を少なくとも2年間装着',
+            '最初の1年は就寝時も含め原則終日装着',
+            '永久的な後戻り防止のためフィックスリテーナーも推奨'
+          ]
+        },
+        {
+          title: '代替治療法',
+          items: [
+            'マウスピース型矯正装置（目立ちにくいが適応症例が限られる）',
+            '部分矯正（前歯のみ・費用と期間を軽減できる場合あり）',
+            '矯正を行わない経過観察'
+          ]
+        }
+      ]
+    },
+    {
+      id: '#2079', name: '佐藤 浩二', age: 28,
+      treatment: 'ホワイトニング（オフィス）', doctor: '佐藤 DH',
+      risk: 'low', ic: '署名済', photo: 'mouse03.jpg',
+      ic_sections: [
+        {
+          title: '処置内容',
+          items: [
+            'オフィスホワイトニング（院内施術）',
+            '施術時間：約60〜80分（1回）',
+            '高濃度過酸化水素ゲルを使用し、歯の表面の着色を除去'
+          ]
+        },
+        {
+          title: 'リスク・副作用',
+          items: [
+            '施術中〜施術後24時間：一時的な知覚過敏（冷たいものがしみる）',
+            '歯肉に薬剤が付着した場合の一時的な白変・炎症',
+            '神経の細い歯や虫歯がある場合は施術できないことがある',
+            '効果の持続期間に個人差あり（平均6ヶ月〜1年）'
+          ],
+          warn: true
+        },
+        {
+          title: '施術前後の注意事項',
+          items: [
+            '施術後24〜48時間：カレー・コーヒー・赤ワイン・タバコ等の着色物を避ける（ホワイトニング後は色素沈着しやすい）',
+            '施術後に知覚過敏が強い場合は知覚過敏用歯磨き粉の使用を推奨',
+            '虫歯・歯周病がある場合は先に治療が必要'
+          ]
+        },
+        {
+          title: '効果の維持について',
+          items: [
+            '効果を維持するために定期的な再施術（6ヶ月〜1年ごと）を推奨',
+            'ホームホワイトニングとの併用（コンビネーション法）でより高い効果・持続が期待できる'
+          ]
+        },
+        {
+          title: '代替治療法',
+          items: [
+            'ホームホワイトニング（低濃度・低コスト・時間がかかる）',
+            'セラミック補綴（ラミネートベニア・クラウン）による審美改善',
+            '定期的なPMTC（歯面清掃）による着色除去'
+          ]
+        }
+      ]
+    },
+    {
+      id: '#2091', name: '加藤 真一', age: 55,
+      treatment: '歯周外科（フラップ手術）', doctor: '鈴木 先生',
+      risk: 'mid', ic: '署名済', photo: 'mouse03.jpg',
+      ic_sections: [
+        {
+          title: '処置内容',
+          items: [
+            '上顎左側臼歯部フラップ手術（歯肉切開・歯周ポケット内搔爬）',
+            '手術時間：約40〜60分（局所麻酔下）',
+            '術後1週間で抜糸'
+          ]
+        },
+        {
+          title: 'リスク・合併症（要重点説明）',
+          items: [
+            '喫煙歴があるため術後治癒が著しく遅延する可能性（禁煙が治療成功の鍵）',
+            '術後の出血・腫脹・疼痛（3〜7日程度）',
+            '根面露出による永続的な知覚過敏',
+            '歯の見た目が長くなる（歯肉退縮）ことがある'
+          ],
+          warn: true
+        },
+        {
+          title: '術前の注意事項',
+          items: [
+            '術前の徹底したプラークコントロール（スケーリング・ルートプレーニング）が必須',
+            '禁煙の強い推奨（最低でも術前2週間〜術後8週間）',
+            '服用中の薬剤（血圧降下薬等）の確認'
+          ]
+        },
+        {
+          title: '術後の注意事項',
+          items: [
+            '抗生剤・鎮痛剤を処方通りに服用',
+            '術後24時間はうがいを強くしない',
+            '術後3ヶ月は再評価のため来院が必要',
+            'その後は3ヶ月ごとのSPT（サポーティブペリオドンタルセラピー）継続'
+          ]
+        },
+        {
+          title: '代替治療法',
+          items: [
+            '非外科的治療の継続（スケーリング・ルートプレーニングのみ）',
+            '抜歯して補綴（インプラント・ブリッジ・義歯）'
+          ]
+        }
+      ]
+    },
+    {
+      id: '#2105', name: '伊藤 幸子', age: 68,
+      treatment: '部分床義歯製作', doctor: '田中 先生',
+      risk: 'low', ic: '署名済', photo: 'mouse03.jpg',
+      ic_sections: [
+        {
+          title: '処置内容',
+          items: [
+            '下顎部分床義歯（金属クラスプ式）の製作',
+            '複数回（5〜7回）の来院が必要（印象・咬合採得・試適・装着・調整）',
+            '完成まで約3〜4週間'
+          ]
+        },
+        {
+          title: 'リスク・注意事項',
+          items: [
+            '支台歯（義歯のバネがかかる歯）への負担増加・動揺リスク',
+            '義歯性口内炎・粘膜の圧痛（初期に多い）',
+            '異物感・発音障害・食事のしにくさ（慣れるまで2〜4週間）',
+            '顎骨の吸収に伴い、定期的なリライン（調整）が必要'
+          ],
+          warn: true
+        },
+        {
+          title: '義歯の使用方法',
+          items: [
+            '就寝時は必ず義歯を外し、水中保管（乾燥・変形防止）',
+            '毎食後、義歯専用ブラシで洗浄（熱湯は使用不可）',
+            '週1〜2回の入れ歯洗浄剤の使用を推奨',
+            '落とした際の破損に注意（水を張った洗面器の上で洗う）'
+          ]
+        },
+        {
+          title: '定期管理',
+          items: [
+            '6ヶ月ごとの義歯チェック・調整',
+            '義歯の適合が悪くなった場合はリライン（裏装）が必要',
+            '支台歯・残存歯の定期的なメンテナンスも重要'
+          ]
+        },
+        {
+          title: '代替治療法',
+          items: [
+            'インプラント（より快適だが費用・侵襲が大きい）',
+            'ブリッジ（隣接歯の切削が必要・適応条件あり）'
+          ]
+        }
+      ]
+    },
+    {
+      id: '#2118', name: '渡辺 大介', age: 41,
+      treatment: '審美補綴（ラミネートベニア）', doctor: '鈴木 先生',
+      risk: 'low', ic: '署名済', photo: 'mouse03.jpg',
+      ic_sections: [
+        {
+          title: '処置内容',
+          items: [
+            '上顎前歯4本へのポーセレン製ラミネートベニア装着',
+            '歯の表面を0.3〜0.7mm切削（不可逆的処置）',
+            '完成まで約2週間（印象→技工→装着）'
+          ]
+        },
+        {
+          title: 'リスク・注意事項',
+          items: [
+            '歯の切削は不可逆的：一度削った歯はベニアなしでは戻せない',
+            'ベニアの破折・脱落リスク（特に硬い食品の咀嚼時）',
+            '歯ぎしり・食いしばりがある場合はベニアが割れやすい（ナイトガード推奨）',
+            '寿命：平均10〜15年（使用状況により変化）'
+          ],
+          warn: true
+        },
+        {
+          title: '生活上の注意事項',
+          items: [
+            '氷・硬いキャンディ・フランスパンなど硬い食品は前歯で噛まない',
+            '食いしばり・歯ぎしりがある場合はナイトガードの装着を推奨',
+            '着色は少ないが、定期的なポリッシングで美しさを維持'
+          ]
+        },
+        {
+          title: '破損・脱落した場合',
+          items: [
+            '割れた・外れたベニアは捨てずに持参',
+            '再装着または再製作が必要（費用は再発生）'
+          ]
+        },
+        {
+          title: '代替治療法',
+          items: [
+            'コンポジットレジン修復（低コスト・修復しやすいが耐久性・審美性がやや劣る）',
+            'ポーセレンクラウン（より多くの歯質を削る）',
+            '歯のホワイトニング（色調改善のみ、形は変えられない）'
+          ]
+        }
+      ]
+    },
+    {
+      id: '#2130', name: '小林 美咲', age: 35,
+      treatment: '歯石除去・SRP', doctor: '山田 DH',
+      risk: 'low', ic: '署名済', photo: 'mouse03.jpg',
+      ic_sections: [
+        {
+          title: '処置内容',
+          items: [
+            '全顎スケーリング・ルートプレーニング（歯石・歯垢の徹底除去）',
+            '歯周病の進行度に応じて4〜6回に分けて実施',
+            '超音波スケーラーおよびハンドスケーラーを使用'
+          ]
+        },
+        {
+          title: '処置後の反応',
+          items: [
+            '処置後に一時的な出血・腫脹・疼痛が生じることがある（2〜3日で改善）',
+            '根面露出により知覚過敏が生じることがある',
+            '歯石除去後は歯の間に隙間ができたように感じることがある（歯石がなくなったため）'
+          ],
+          warn: true
+        },
+        {
+          title: '処置後の注意事項',
+          items: [
+            '処置後2時間は飲食を控える（麻酔が切れるまで）',
+            '翌日から通常通りの食事・歯磨きが可能',
+            '知覚過敏が強い場合は知覚過敏用歯磨き粉の使用を推奨'
+          ]
+        },
+        {
+          title: '定期管理（SPT）',
+          items: [
+            '歯周病は再発しやすい疾患：3ヶ月ごとのメンテナンスが重要',
+            '自宅での丁寧な歯磨き・フロス使用が治療効果を維持する鍵',
+            '喫煙は歯周病を悪化させるため禁煙を強く推奨'
+          ]
+        },
+        {
+          title: '重度の場合の追加治療',
+          items: [
+            '非外科治療で改善しない場合はフラップ手術（歯周外科）が必要になる場合がある',
+            '動揺が著しい歯は保存困難なため抜歯を検討することがある'
+          ]
+        }
+      ]
+    },
+    {
+      id: '#2144', name: '松本 翔太', age: 12,
+      treatment: '小児矯正（マウスピース）', doctor: '山田 先生',
+      risk: 'mid', ic: '確認中', photo: 'mouse03.jpg',
+      ic_sections: [
+        {
+          title: '処置内容',
+          items: [
+            '混合歯列期（乳歯と永久歯が混在）の小児矯正',
+            'マウスピース型装置（取り外し可）を使用',
+            '治療期間：1〜2年（その後定期観察が継続）',
+            '※保護者同席のもと説明します'
+          ]
+        },
+        {
+          title: 'リスク・注意事項',
+          items: [
+            '装着時間が不足すると効果が著しく低下（1日20時間以上が必須）',
+            '成長とともに歯列が変化するため、後戻りや追加治療が必要になる場合がある',
+            '永久歯列完成後（中高生）に第Ⅱ期治療（本格矯正）が必要になる可能性がある'
+          ],
+          warn: true
+        },
+        {
+          title: '使用方法（保護者確認事項）',
+          items: [
+            '1日20時間以上装着：食事・歯磨き以外は装着する',
+            '装置の洗浄：毎日流水でブラッシング洗浄、定期的に洗浄剤を使用',
+            '装着記録をつけることを推奨（目標時間の達成確認）',
+            '破損・紛失した場合は早急に連絡（再製作費用が発生）'
+          ]
+        },
+        {
+          title: '定期管理',
+          items: [
+            '1〜2ヶ月ごとの定期観察・調整が必要',
+            '成長の観察と矯正力の調整を継続的に行う',
+            '虫歯予防のための定期検診・フッ素塗布を並行して実施'
+          ]
+        },
+        {
+          title: '代替治療法・経過観察の選択肢',
+          items: [
+            '永久歯列完成（13〜15歳頃）まで経過観察してから本格矯正を開始',
+            'ブラケット矯正（早期から開始する場合）',
+            '治療しない場合のリスク（不正咬合の悪化・将来的な治療の複雑化）について説明済み'
+          ]
+        }
+      ]
+    }
+  ];
+
+  /* ===== BUILD TABLE ===== */
+  const tbody = document.getElementById('patient-tbody');
+  patients.forEach(function(p, i) {
+    const riskLabel = p.risk === 'high' ? '<span class="tag tag-bad">高</span>'
+                    : p.risk === 'mid'  ? '<span class="tag tag-warn">中</span>'
+                                        : '<span class="tag tag-ok">低</span>';
+    const icLabel = p.ic === '未署名' ? '<span class="tag tag-bad">未署名</span>'
+                  : p.ic === '確認中' ? '<span class="tag tag-warn">確認中</span>'
+                                      : '<span class="tag tag-ok">署名済</span>';
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + p.id + '</td>' +
+      '<td style="color:var(--text-main);font-weight:600">' + p.name + '</td>' +
+      '<td>' + p.age + '歳</td>' +
+      '<td>' + p.treatment + '</td>' +
+      '<td>' + p.doctor + '</td>' +
+      '<td>' + riskLabel + '</td>' +
+      '<td>' + icLabel + '</td>';
+    tr.addEventListener('click', function() { selectPatient(i); });
+    tbody.appendChild(tr);
+  });
+
+  /* ===== SELECT PATIENT ===== */
+  var selectedRow = null;
+
+  function selectPatient(idx) {
+    const p = patients[idx];
+
+    // Highlight row
+    if (selectedRow) selectedRow.classList.remove('selected');
+    selectedRow = tbody.rows[idx];
+    selectedRow.classList.add('selected');
+
+    // Header
+    document.getElementById('d-id').textContent = p.id;
+    document.getElementById('d-name').textContent = p.name + '（' + p.age + '歳）';
+    document.getElementById('d-treatment').textContent = '｜ ' + p.treatment;
+
+    const riskBadge = p.risk === 'high'
+      ? '<span class="tag tag-bad">高リスク</span>'
+      : p.risk === 'mid'
+      ? '<span class="tag tag-warn">中リスク</span>'
+      : '<span class="tag tag-ok">低リスク</span>';
+    document.getElementById('d-risk').innerHTML = riskBadge;
+
+    // IC panel
+    const panel = document.getElementById('ic-panel');
+    panel.innerHTML = '';
+    p.ic_sections.forEach(function(sec) {
+      const secEl = document.createElement('div');
+      const titleEl = document.createElement('div');
+      titleEl.className = 'ic-section-title';
+      titleEl.textContent = sec.title;
+      secEl.appendChild(titleEl);
+
+      const listEl = document.createElement('div');
+      listEl.className = 'ic-items';
+      sec.items.forEach(function(item) {
+        const itemEl = document.createElement('div');
+        itemEl.className = sec.warn ? 'ic-item warn-item' : 'ic-item';
+        itemEl.textContent = item;
+        listEl.appendChild(itemEl);
+      });
+      secEl.appendChild(listEl);
+      panel.appendChild(secEl);
+    });
+
+    // Photo
+    document.getElementById('oral-photo').src = p.photo;
+    document.getElementById('photo-caption').textContent = p.name + ' 様　口腔内写真';
+
+    // Show detail
+    const dv = document.getElementById('detail-view');
+    dv.classList.add('visible');
+    dv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
   function toggleSidebar() {
     document.getElementById('sidebar').classList.toggle('open');
     document.getElementById('overlay').classList.toggle('open');

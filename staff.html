@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DENTAL ERP | AIコンセンサス・ビルダー</title>
+  <title>DENTAL ERP | スタッフポータル</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -70,6 +70,15 @@
       color: var(--text-main);
       letter-spacing: .04em;
     }
+    .topbar-badge {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(0,200,215,.4);
+      color: var(--accent);
+      margin-left: 10px;
+      letter-spacing: .04em;
+    }
     .topbar-tabs {
       display: flex;
       gap: 4px;
@@ -83,12 +92,27 @@
       cursor: pointer;
       border: 1px solid transparent;
       transition: all .2s;
-      text-decoration: none;
     }
     .topbar-tab:hover, .topbar-tab.active {
       color: var(--accent);
       border-color: var(--accent2);
       background: rgba(0,200,215,.07);
+    }
+    .topbar-logout {
+      font-size: 11px;
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      transition: all .2s;
+      text-decoration: none;
+      margin-left: 8px;
+    }
+    .topbar-logout:hover {
+      color: var(--danger);
+      border-color: var(--danger);
+      background: rgba(232,64,64,.07);
     }
     .hamburger {
       display: none;
@@ -186,7 +210,37 @@
       color: var(--text-muted);
     }
 
-    /* ページ固有: カードグリッド */
+    /* Cards */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .info-card {
+      background: var(--bg-card2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 16px;
+    }
+    .info-card-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      letter-spacing: .03em;
+    }
+    .info-card-value {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .info-card-value.ok   { color: var(--ok2); }
+    .info-card-value.warn { color: var(--warn); }
+    .info-card-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
     .content-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -203,43 +257,14 @@
       align-items: center;
       gap: 8px;
     }
-    .content-card-body {
-      color: var(--text-label);
-      font-size: 12.5px;
-      line-height: 1.7;
-    }
 
-    .status-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-    .status-item {
-      background: var(--bg-card2);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 14px 16px;
-    }
-    .status-item-label {
-      font-size: 10px;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-      letter-spacing: .03em;
-    }
-    .status-item-value {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--text-main);
-    }
-    .status-item-value.ok  { color: var(--ok2); }
-    .status-item-value.warn { color: var(--warn); }
-
-    .consensus-table {
+    /* Schedule table */
+    .schedule-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 12px;
     }
-    .consensus-table th {
+    .schedule-table th {
       background: rgba(0,200,215,.08);
       color: var(--accent);
       font-weight: 600;
@@ -248,13 +273,14 @@
       border-bottom: 1px solid var(--border);
       letter-spacing: .04em;
     }
-    .consensus-table td {
+    .schedule-table td {
       padding: 9px 12px;
       color: var(--text-label);
       border-bottom: 1px solid rgba(22,48,80,.5);
     }
-    .consensus-table tr:last-child td { border-bottom: none; }
-    .consensus-table tr:hover td { background: rgba(0,200,215,.04); }
+    .schedule-table tr:last-child td { border-bottom: none; }
+    .schedule-table tr:hover td { background: rgba(0,200,215,.04); }
+
     .tag {
       display: inline-block;
       font-size: 9.5px;
@@ -266,6 +292,34 @@
     .tag-ok    { background: rgba(48,200,117,.15); color: var(--ok2); border: 1px solid rgba(48,200,117,.3); }
     .tag-warn  { background: rgba(240,160,0,.12); color: var(--warn); border: 1px solid rgba(240,160,0,.3); }
     .tag-info  { background: rgba(0,200,215,.1); color: var(--accent); border: 1px solid rgba(0,200,215,.25); }
+
+    /* Notice list */
+    .notice-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .notice-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--bg-card2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .notice-date {
+      font-size: 10px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      padding-top: 2px;
+      min-width: 72px;
+    }
+    .notice-text {
+      color: var(--text-label);
+      line-height: 1.55;
+    }
+    .notice-text strong { color: var(--text-main); font-weight: 600; }
 
     /* Right panel */
     .right-panel {
@@ -304,7 +358,6 @@
     .alert-item.danger .alert-icon { color: var(--danger); }
     .alert-item.ok .alert-icon { color: var(--ok); }
 
-    /* Alert drawer (mobile) */
     .alert-drawer-toggle {
       display: none;
       align-items: center;
@@ -321,10 +374,9 @@
       text-align: left;
     }
 
-    /* Responsive */
     @media (max-width: 1024px) {
       .right-panel { display: none; }
-      .status-grid { grid-template-columns: repeat(2, 1fr); }
+      .info-grid { grid-template-columns: repeat(2, 1fr); }
       .topbar-tabs { display: none; }
       .hamburger { display: flex; }
       .alert-drawer-toggle { display: flex; }
@@ -353,7 +405,7 @@
         z-index: 199;
       }
       .sidebar-overlay.open { display: block; }
-      .status-grid { grid-template-columns: 1fr 1fr; }
+      .info-grid { grid-template-columns: 1fr 1fr; }
       .main-inner { padding: 14px 12px 24px; }
       .page-heading h1 { font-size: 17px; }
     }
@@ -365,12 +417,14 @@
   <header class="topbar">
     <span class="topbar-logo">DENTAL ERP</span>
     <div class="topbar-sep"></div>
-    <span class="topbar-title">AIコンセンサス・ビルダー</span>
+    <span class="topbar-title">スタッフポータル</span>
+    <span class="topbar-badge">STAFF</span>
     <nav class="topbar-tabs">
-      <a class="topbar-tab" href="president.html">ダッシュボード</a>
-      <span class="topbar-tab active">AIコンセンサス</span>
+      <span class="topbar-tab active">ホーム</span>
+      <span class="topbar-tab">スケジュール</span>
       <span class="topbar-tab">設定</span>
     </nav>
+    <a class="topbar-logout" href="index.html">ログアウト</a>
     <div class="hamburger" id="hamburger" onclick="toggleSidebar()" aria-label="メニュー">
       <span></span><span></span><span></span>
     </div>
@@ -382,41 +436,33 @@
 
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-group">
-        <div class="sidebar-group-label">受付・初診</div>
-        <a class="sidebar-item" href="president.html">
-          <i class="sidebar-icon">🔗</i>ゼロ・インテーク
-        </a>
-      </div>
-      <div class="sidebar-group">
-        <div class="sidebar-group-label">診断・計画</div>
-        <a class="sidebar-item active" href="ai-consensus-builder.html">
-          <i class="sidebar-icon">🤖</i>AIコンセンサス・ビルダー
-        </a>
-      </div>
-      <div class="sidebar-group">
-        <div class="sidebar-group-label">診療中</div>
-        <a class="sidebar-item" href="ic-defense.html">
-          <i class="sidebar-icon">🛡️</i>IC防衛
-          <span style="font-size:9px;color:var(--text-muted);display:block;margin-left:25px;margin-top:1px;">リスク・ディフェンダー</span>
-        </a>
-      </div>
-      <div class="sidebar-group">
-        <div class="sidebar-group-label">教育・離職防止</div>
+        <div class="sidebar-group-label">業務</div>
+        <div class="sidebar-item active">
+          <i class="sidebar-icon">🏠</i>ホーム
+        </div>
         <div class="sidebar-item">
-          <i class="sidebar-icon">🧠</i>メンタル・トレーサー
+          <i class="sidebar-icon">📅</i>本日のスケジュール
+        </div>
+        <div class="sidebar-item">
+          <i class="sidebar-icon">🔗</i>受付・初診対応
         </div>
       </div>
       <div class="sidebar-group">
-        <div class="sidebar-group-label">リコール</div>
+        <div class="sidebar-group-label">患者管理</div>
         <div class="sidebar-item">
-          <i class="sidebar-icon">📅</i>オート・フィラー
-          <span style="font-size:9px;color:var(--text-muted);display:block;margin-left:25px;margin-top:1px;">予約自動補填</span>
+          <i class="sidebar-icon">👤</i>患者一覧
+        </div>
+        <div class="sidebar-item">
+          <i class="sidebar-icon">📋</i>カルテ確認
         </div>
       </div>
       <div class="sidebar-group">
-        <div class="sidebar-group-label">経営管理</div>
+        <div class="sidebar-group-label">連絡・申請</div>
         <div class="sidebar-item">
-          <i class="sidebar-icon">💰</i>キャッシュフロー・ナビゲーター
+          <i class="sidebar-icon">📢</i>お知らせ
+        </div>
+        <div class="sidebar-item">
+          <i class="sidebar-icon">📝</i>有給・休暇申請
         </div>
       </div>
     </aside>
@@ -425,132 +471,135 @@
       <div class="main-inner">
 
         <div class="page-heading">
-          <h1>AIコンセンサス・ビルダー</h1>
-          <span class="subtitle">診断・治療計画 コンセンサス支援 — 2026年4月</span>
+          <h1>スタッフポータル</h1>
+          <span class="subtitle">Staff Portal — 2026年4月</span>
         </div>
 
         <!-- Alert drawer (mobile/tablet) -->
         <div>
           <button class="alert-drawer-toggle" onclick="toggleAlerts()">
-            ⚠ アラート＆リマインド <span id="alert-arrow">▼</span>
+            📢 お知らせ＆リマインド <span id="alert-arrow">▼</span>
           </button>
           <div class="alert-drawer" id="alert-drawer">
             <div class="alert-list">
               <div class="alert-item warn">
                 <i class="alert-icon">🟡</i>
-                <div class="alert-text"><strong>未確認の治療計画が3件あります</strong><br>患者同意を確認してください</div>
+                <div class="alert-text"><strong>明日のミーティング資料を確認</strong><br>朝礼 09:00〜 資料配布済み</div>
               </div>
               <div class="alert-item ok">
                 <i class="alert-icon">🟢</i>
-                <div class="alert-text"><strong>AIスコア更新完了</strong><br>今日 09:15 同期済み</div>
+                <div class="alert-text"><strong>今月の有給残日数：8日</strong></div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Status summary -->
-        <div class="status-grid">
-          <div class="status-item">
-            <div class="status-item-label">今月の合意形成件数</div>
-            <div class="status-item-value ok">42<span style="font-size:12px;font-weight:400;color:var(--text-muted)"> 件</span></div>
+        <!-- Info cards -->
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="info-card-label">本日の担当患者数</div>
+            <div class="info-card-value ok">12<span style="font-size:12px;font-weight:400;color:var(--text-muted)"> 人</span></div>
+            <div class="info-card-sub">次の患者: 10:30〜 #1042</div>
           </div>
-          <div class="status-item">
-            <div class="status-item-label">コンセンサス達成率</div>
-            <div class="status-item-value ok">87<span style="font-size:12px;font-weight:400;color:var(--text-muted)">%</span></div>
+          <div class="info-card">
+            <div class="info-card-label">今月の有給残日数</div>
+            <div class="info-card-value">8<span style="font-size:12px;font-weight:400;color:var(--text-muted)"> 日</span></div>
+            <div class="info-card-sub">取得済: 2日</div>
           </div>
-          <div class="status-item">
-            <div class="status-item-label">未確認（要フォロー）</div>
-            <div class="status-item-value warn">3<span style="font-size:12px;font-weight:400;color:var(--text-muted)"> 件</span></div>
+          <div class="info-card">
+            <div class="info-card-label">未読お知らせ</div>
+            <div class="info-card-value warn">3<span style="font-size:12px;font-weight:400;color:var(--text-muted)"> 件</span></div>
+            <div class="info-card-sub">最新: 今日 08:00</div>
           </div>
         </div>
 
-        <!-- Main table card -->
+        <!-- Today's schedule -->
         <div class="content-card">
           <div class="content-card-title">
-            <span>🤖</span> 治療計画コンセンサス一覧
+            <span>📅</span> 本日のスケジュール — 2026年5月1日（木）
           </div>
-          <table class="consensus-table">
+          <table class="schedule-table">
             <thead>
               <tr>
-                <th>患者ID</th>
-                <th>治療計画</th>
-                <th>AIスコア</th>
-                <th>患者同意</th>
-                <th>担当医</th>
-                <th>更新日</th>
+                <th>時間</th>
+                <th>患者</th>
+                <th>処置内容</th>
+                <th>担当</th>
+                <th>状態</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>#1042</td>
-                <td>インプラント（上顎2本）</td>
-                <td><span class="tag tag-ok">92 / 100</span></td>
-                <td><span class="tag tag-ok">同意済</span></td>
-                <td>田中 先生</td>
-                <td>2026-04-28</td>
+                <td>09:00</td>
+                <td>#1042 田村 さん</td>
+                <td>定期検診・PMTC</td>
+                <td>山田 DH</td>
+                <td><span class="tag tag-ok">完了</span></td>
               </tr>
               <tr>
-                <td>#1087</td>
-                <td>矯正治療（マウスピース）</td>
-                <td><span class="tag tag-ok">88 / 100</span></td>
-                <td><span class="tag tag-ok">同意済</span></td>
+                <td>09:30</td>
+                <td>#1087 鈴木 さん</td>
+                <td>初診・口腔内写真</td>
+                <td>佐藤 DH</td>
+                <td><span class="tag tag-ok">完了</span></td>
+              </tr>
+              <tr>
+                <td>10:30</td>
+                <td>#1042 中村 さん</td>
+                <td>根管治療（2回目）</td>
+                <td>田中 先生</td>
+                <td><span class="tag tag-info">予定</span></td>
+              </tr>
+              <tr>
+                <td>11:00</td>
+                <td>#1103 伊藤 さん</td>
+                <td>インプラント術前検査</td>
+                <td>田中 先生</td>
+                <td><span class="tag tag-info">予定</span></td>
+              </tr>
+              <tr>
+                <td>13:00</td>
+                <td>#1115 渡辺 さん</td>
+                <td>矯正調整</td>
                 <td>山田 先生</td>
-                <td>2026-04-27</td>
+                <td><span class="tag tag-info">予定</span></td>
               </tr>
               <tr>
-                <td>#1103</td>
-                <td>根管治療＋クラウン</td>
-                <td><span class="tag tag-warn">74 / 100</span></td>
-                <td><span class="tag tag-warn">要確認</span></td>
+                <td>14:00</td>
+                <td>#1121 小林 さん</td>
+                <td>ホワイトニング施術</td>
+                <td>佐藤 DH</td>
+                <td><span class="tag tag-info">予定</span></td>
+              </tr>
+              <tr>
+                <td>15:30</td>
+                <td>#1134 加藤 さん</td>
+                <td>義歯調整・フィッティング</td>
                 <td>田中 先生</td>
-                <td>2026-04-26</td>
-              </tr>
-              <tr>
-                <td>#1115</td>
-                <td>ホワイトニング（オフィス）</td>
-                <td><span class="tag tag-ok">95 / 100</span></td>
-                <td><span class="tag tag-ok">同意済</span></td>
-                <td>鈴木 先生</td>
-                <td>2026-04-25</td>
-              </tr>
-              <tr>
-                <td>#1121</td>
-                <td>歯周病治療（SRP）</td>
-                <td><span class="tag tag-warn">70 / 100</span></td>
-                <td><span class="tag tag-warn">要確認</span></td>
-                <td>山田 先生</td>
-                <td>2026-04-24</td>
-              </tr>
-              <tr>
-                <td>#1134</td>
-                <td>義歯製作（部分床義歯）</td>
-                <td><span class="tag tag-warn">68 / 100</span></td>
-                <td><span class="tag tag-warn">要確認</span></td>
-                <td>田中 先生</td>
-                <td>2026-04-23</td>
-              </tr>
-              <tr>
-                <td>#1148</td>
-                <td>審美補綴（ラミネートベニア）</td>
-                <td><span class="tag tag-ok">91 / 100</span></td>
-                <td><span class="tag tag-ok">同意済</span></td>
-                <td>鈴木 先生</td>
-                <td>2026-04-22</td>
+                <td><span class="tag tag-info">予定</span></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <!-- Memo card -->
+        <!-- Notice board -->
         <div class="content-card">
           <div class="content-card-title">
-            <span>💡</span> AIコンセンサス・ビルダーについて
+            <span>📢</span> お知らせ
           </div>
-          <div class="content-card-body">
-            AIコンセンサス・ビルダーは、診断データと患者属性をもとに治療計画の最適度をスコアリングし、
-            医師と患者の合意形成をサポートするシステムです。<br><br>
-            スコアが80未満の場合は追加説明や代替案の提示を推奨します。
-            要確認の案件は優先的にフォローアップを行ってください。
+          <div class="notice-list">
+            <div class="notice-item">
+              <div class="notice-date">2026-05-01</div>
+              <div class="notice-text"><strong>5月の勤務シフト確定のお知らせ</strong><br>5月分のシフト表を更新しました。各自確認してください。</div>
+            </div>
+            <div class="notice-item">
+              <div class="notice-date">2026-04-30</div>
+              <div class="notice-text"><strong>感染対策マニュアル改訂版の配布</strong><br>改訂版を医院ファイルサーバーに格納しました。必ず目を通してください。</div>
+            </div>
+            <div class="notice-item">
+              <div class="notice-date">2026-04-28</div>
+              <div class="notice-text"><strong>5月10日（日）院内勉強会のご案内</strong><br>テーマ：口腔機能低下症の診査・対応　14:00〜15:30 研修室にて</div>
+            </div>
           </div>
         </div>
 
@@ -558,23 +607,23 @@
     </main>
 
     <aside class="right-panel">
-      <div class="right-panel-header">⚠ アラート＆リマインド</div>
+      <div class="right-panel-header">📢 お知らせ＆リマインド</div>
       <div class="alert-list">
         <div class="alert-item warn">
           <i class="alert-icon">🟡</i>
-          <div class="alert-text"><strong>未確認の治療計画が3件あります</strong><br>患者同意を確認してください</div>
+          <div class="alert-text"><strong>明日のミーティング資料を確認</strong><br>朝礼 09:00〜 資料配布済み</div>
         </div>
         <div class="alert-item ok">
           <i class="alert-icon">🟢</i>
-          <div class="alert-text"><strong>AIスコア更新完了</strong><br>今日 09:15 同期済み</div>
+          <div class="alert-text"><strong>今月の有給残日数：8日</strong></div>
         </div>
         <div class="alert-item warn">
           <i class="alert-icon">🟡</i>
-          <div class="alert-text"><strong>#1103 フォロー期限</strong><br>明日までに患者へ連絡</div>
+          <div class="alert-text"><strong>5月シフト確認をお願いします</strong><br>期限：5月3日まで</div>
         </div>
         <div class="alert-item ok">
           <i class="alert-icon">🟢</i>
-          <div class="alert-text"><strong>今月の達成率 87%</strong><br>先月比 +4% 改善</div>
+          <div class="alert-text"><strong>勉強会申込み受付中</strong><br>5月10日（日）14:00〜</div>
         </div>
       </div>
     </aside>
