@@ -173,6 +173,22 @@
       border-left-color: var(--accent);
       background: rgba(0,200,215,.1);
     }
+    .sidebar-item--disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .sidebar-item--disabled::after {
+      content: '準備中';
+      font-size: 9px;
+      background: rgba(106,138,170,.18);
+      color: var(--text-muted);
+      border-radius: 3px;
+      padding: 1px 5px;
+      margin-left: auto;
+      letter-spacing: .03em;
+      white-space: nowrap;
+    }
     .sidebar-icon {
       width: 16px;
       text-align: center;
@@ -528,28 +544,28 @@
         <div class="sidebar-item active">
           <i class="sidebar-icon">🏠</i>ホーム
         </div>
-        <div class="sidebar-item">
+        <div class="sidebar-item sidebar-item--disabled">
           <i class="sidebar-icon">📅</i>本日のスケジュール
         </div>
-        <div class="sidebar-item">
+        <div class="sidebar-item sidebar-item--disabled">
           <i class="sidebar-icon">🔗</i>受付・初診対応
         </div>
       </div>
       <div class="sidebar-group">
         <div class="sidebar-group-label">患者管理</div>
-        <div class="sidebar-item">
+        <div class="sidebar-item sidebar-item--disabled">
           <i class="sidebar-icon">👤</i>患者一覧
         </div>
-        <div class="sidebar-item">
+        <div class="sidebar-item sidebar-item--disabled">
           <i class="sidebar-icon">📋</i>カルテ確認
         </div>
       </div>
       <div class="sidebar-group">
         <div class="sidebar-group-label">連絡・申請</div>
-        <div class="sidebar-item">
+        <div class="sidebar-item sidebar-item--disabled">
           <i class="sidebar-icon">📢</i>お知らせ
         </div>
-        <div class="sidebar-item">
+        <div class="sidebar-item sidebar-item--disabled">
           <i class="sidebar-icon">📝</i>有給・休暇申請
         </div>
       </div>
