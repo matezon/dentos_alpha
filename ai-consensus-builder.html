@@ -81,7 +81,7 @@
     .main { flex: 1; display: flex; flex-direction: column; min-width: 0; overflow-y: auto; }
     .main-inner { padding: 20px 20px 28px; display: flex; flex-direction: column; gap: 16px; min-height: 100%; }
 
-    .page-heading { display: flex; align-items: baseline; gap: 10px; }
+    .page-heading { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
     .page-heading h1 { font-size: 20px; font-weight: 700; letter-spacing: .06em; }
     .page-heading .subtitle { font-size: 11px; color: var(--text-muted); }
 
@@ -96,7 +96,8 @@
       border-bottom: 1px solid var(--border);
       display: flex; align-items: center; gap: 8px;
     }
-    .patient-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .patient-table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 560px; }
     .patient-table th {
       background: rgba(0,200,215,.06); color: var(--text-muted);
       font-weight: 600; padding: 8px 14px; text-align: left;
@@ -324,6 +325,12 @@
       .page-heading h1 { font-size: 17px; }
       .stepper { gap: 0; }
     }
+    @media (max-width: 480px) {
+      .step { min-width: 58px; }
+      .step-label { font-size: 8.5px; }
+      .step-dot { width: 24px; height: 24px; font-size: 10px; }
+      .step:not(:last-child)::after { top: 12px; left: calc(50% + 12px); width: calc(100% - 24px); }
+    }
   </style>
 </head>
 <body>
@@ -420,6 +427,7 @@
           <div class="list-card-header">
             🤖 患者一覧 — 患者を選択すると詳細を表示します
           </div>
+          <div class="table-scroll">
           <table class="patient-table">
             <thead>
               <tr>
@@ -435,6 +443,7 @@
             </thead>
             <tbody id="patient-tbody"></tbody>
           </table>
+          </div>
         </div>
 
         <!-- Detail view -->
