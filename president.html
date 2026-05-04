@@ -493,6 +493,76 @@
       .metrics-list { width: 100%; }
     }
 
+    /* ===== STRATEGY TUNER ===== */
+    .strategy-body {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .sliders-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      min-width: 0;
+    }
+    .slider-item { display: flex; flex-direction: column; gap: 5px; }
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 4px;
+      font-size: 9.5px;
+    }
+    .slider-lbl-l { color: var(--accent); white-space: nowrap; }
+    .slider-lbl-r { color: var(--text-muted); white-space: nowrap; }
+    .slider-lbl   { color: var(--text-label); flex: 1; white-space: nowrap; font-size: 9px; }
+    .slider-val   { color: var(--accent); font-weight: 700; font-size: 10px; min-width: 22px; text-align: center; }
+    .slider-range {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 3px;
+      border-radius: 2px;
+      background: #163050;
+      outline: none;
+      cursor: pointer;
+    }
+    .slider-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      box-shadow: 0 0 6px rgba(0,200,215,.5);
+      border: 2px solid #0d2240;
+    }
+    .slider-range::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid #0d2240;
+      cursor: pointer;
+      box-shadow: 0 0 6px rgba(0,200,215,.5);
+    }
+    .radar-col { flex-shrink: 0; width: 120px; height: 120px; }
+    .radar-grid { fill: none; stroke: #163050; stroke-width: .7; }
+    .radar-axis { stroke: #163050; stroke-width: .7; }
+    .radar-data {
+      fill: rgba(0,200,215,.15);
+      stroke: var(--accent);
+      stroke-width: 1.5;
+      stroke-linejoin: round;
+    }
+    .radar-dot { fill: var(--accent); }
+    .radar-label { fill: var(--text-label); font-size: 5.5px; font-family: 'Segoe UI', sans-serif; }
+    @media (max-width: 420px) {
+      .strategy-body { flex-direction: column; }
+      .radar-col { width: 100%; height: 150px; }
+    }
+
     /* Alerts drawer for mobile */
     .alert-drawer-toggle {
       display: none;
@@ -615,7 +685,7 @@
 
   <!-- Top bar -->
   <header class="topbar">
-    <span class="topbar-logo">DentOs</span>
+    <a class="topbar-logo" href="president.html" style="text-decoration:none">DentOs</a>
     <div class="topbar-sep"></div>
     <span class="topbar-title">経営コックピット</span>
     <nav class="topbar-tabs">
@@ -638,7 +708,7 @@
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-group">
         <div class="sidebar-group-label">受付・初診</div>
-        <div class="sidebar-item active">
+        <div class="sidebar-item active" style="cursor:default;pointer-events:none">
           <i class="sidebar-icon">🔗</i>ゼロ・インテーク
         </div>
       </div>
@@ -668,12 +738,7 @@
           <span style="font-size:9px;color:var(--text-muted);display:block;margin-left:25px;margin-top:1px;">予約自動補填</span>
         </div>
       </div>
-      <div class="sidebar-group">
-        <div class="sidebar-group-label">経営管理</div>
-        <div class="sidebar-item">
-          <i class="sidebar-icon">💰</i>キャッシュフロー・ナビゲーター
-        </div>
-      </div>
+
     </aside>
 
     <!-- Main content -->
@@ -729,13 +794,13 @@
               <div class="circle-wrap">
                 <svg viewBox="0 0 100 100">
                   <circle class="circle-bg" cx="50" cy="50" r="42" />
-                  <circle class="circle-ring" cx="50" cy="50" r="42"
+                  <circle class="circle-ring" id="mgmt-ring" cx="50" cy="50" r="42"
                     stroke-dasharray="263.9"
                     stroke-dashoffset="31.7"
                     style="stroke:#00c8d7" />
                 </svg>
                 <div class="circle-inner">
-                  <span class="circle-score">88</span>
+                  <span class="circle-score" id="mgmt-score">88</span>
                   <span class="circle-label">/ 100</span>
                 </div>
               </div>
@@ -762,83 +827,90 @@
                 </div>
               </div>
             </div>
-            <div class="mini-graph">
-              <div class="mini-graph-label">月次対比推移</div>
-              <div class="mini-bars">
-                <div class="mini-bar prev" style="height:55%"></div>
-                <div class="mini-bar prev" style="height:60%"></div>
-                <div class="mini-bar prev" style="height:50%"></div>
-                <div class="mini-bar prev" style="height:70%"></div>
-                <div class="mini-bar prev" style="height:65%"></div>
-                <div class="mini-bar curr" style="height:80%"></div>
-                <div class="mini-bar curr" style="height:88%"></div>
-              </div>
-            </div>
+
             <div class="sync-row">
               <div class="sync-dot"></div>データ同期済み — 今日 08:32
             </div>
           </div>
 
-          <!-- Card 2: 人事管理スコア -->
+          <!-- Card 2: 診療方針チューナー -->
           <div class="score-card">
             <div class="score-card-header">
               <div>
-                <div class="score-card-title">人事管理スコア</div>
-                <div class="score-card-sub">HR Management Score</div>
+                <div class="score-card-title">診療方針チューナー</div>
+                <div class="score-card-sub">Strategy Tuner</div>
               </div>
-              <div class="score-badge">月次</div>
+              <div class="score-badge">カスタム</div>
             </div>
-            <div class="score-body">
-              <div class="circle-wrap">
-                <svg viewBox="0 0 100 100">
-                  <circle class="circle-bg" cx="50" cy="50" r="42" />
-                  <circle class="circle-ring" cx="50" cy="50" r="42"
-                    stroke-dasharray="263.9"
-                    stroke-dashoffset="66.0"
-                    style="stroke:#f0a000" />
+
+            <div class="strategy-body">
+              <div class="sliders-col">
+
+                <div class="slider-item">
+                  <div class="slider-header">
+                    <span class="slider-lbl-l">自費</span>
+                    <span class="slider-val" id="val-jisho">50</span>
+                    <span class="slider-lbl-r">保険</span>
+                  </div>
+                  <input type="range" class="slider-range" id="sl-jisho" min="0" max="100" value="50" oninput="onSlider()">
+                </div>
+
+                <div class="slider-item">
+                  <div class="slider-header">
+                    <span class="slider-lbl-l">CS重視</span>
+                    <span class="slider-val" id="val-cs">50</span>
+                    <span class="slider-lbl-r">効率重視</span>
+                  </div>
+                  <input type="range" class="slider-range" id="sl-cs" min="0" max="100" value="50" oninput="onSlider()">
+                </div>
+
+                <div class="slider-item">
+                  <div class="slider-header">
+                    <span class="slider-lbl">コンセンサス重視度</span>
+                    <span class="slider-val" id="val-consensus">50</span>
+                  </div>
+                  <input type="range" class="slider-range" id="sl-consensus" min="0" max="100" value="50" oninput="onSlider()">
+                </div>
+
+                <div class="slider-item">
+                  <div class="slider-header">
+                    <span class="slider-lbl">IC重視度</span>
+                    <span class="slider-val" id="val-ic">50</span>
+                  </div>
+                  <input type="range" class="slider-range" id="sl-ic" min="0" max="100" value="50" oninput="onSlider()">
+                </div>
+
+              </div>
+
+              <div class="radar-col">
+                <svg viewBox="0 0 100 100" width="100%" height="100%">
+                  <!-- Grid at 25%, 50%, 75% of max radius 38 -->
+                  <polygon class="radar-grid" points="50,40.5 59.5,50 50,59.5 40.5,50"/>
+                  <polygon class="radar-grid" points="50,31 69,50 50,69 31,50"/>
+                  <polygon class="radar-grid" points="50,21.5 78.5,50 50,78.5 21.5,50"/>
+                  <!-- Axis lines (center to tip) -->
+                  <line class="radar-axis" x1="50" y1="50" x2="50" y2="12"/>
+                  <line class="radar-axis" x1="50" y1="50" x2="88" y2="50"/>
+                  <line class="radar-axis" x1="50" y1="50" x2="50" y2="88"/>
+                  <line class="radar-axis" x1="50" y1="50" x2="12" y2="50"/>
+                  <!-- Data polygon (default: all 50% → radius 19) -->
+                  <polygon id="radar-polygon" class="radar-data" points="50,31 69,50 50,69 31,50"/>
+                  <!-- Data dots -->
+                  <circle id="rdot-0" class="radar-dot" cx="50" cy="31" r="2"/>
+                  <circle id="rdot-1" class="radar-dot" cx="69" cy="50" r="2"/>
+                  <circle id="rdot-2" class="radar-dot" cx="50" cy="69" r="2"/>
+                  <circle id="rdot-3" class="radar-dot" cx="31" cy="50" r="2"/>
+                  <!-- Axis tip labels (outer = higher emphasis) -->
+                  <text class="radar-label" x="50" y="9" text-anchor="middle">自費</text>
+                  <text class="radar-label" x="91" y="53" text-anchor="start">CS</text>
+                  <text class="radar-label" x="50" y="97" text-anchor="middle">合意</text>
+                  <text class="radar-label" x="9" y="53" text-anchor="end">IC</text>
                 </svg>
-                <div class="circle-inner">
-                  <span class="circle-score" style="color:#f0c060">75</span>
-                  <span class="circle-label">/ 100</span>
-                </div>
-              </div>
-              <div class="metrics-list">
-                <div class="metric-item">
-                  <div class="metric-dot ok"></div>
-                  <span class="metric-name">有給消化率 (Rec.1 達成)</span>
-                  <span class="metric-val ok">85%</span>
-                </div>
-                <div class="metric-item">
-                  <div class="metric-dot ok"></div>
-                  <span class="metric-name">残業 (Sat.) 改善</span>
-                  <span class="metric-val ok">-42%</span>
-                </div>
-                <div class="metric-item">
-                  <div class="metric-dot warn"></div>
-                  <span class="metric-name">面談 (Sat.) スコア</span>
-                  <span class="metric-val warn">68 / 92</span>
-                </div>
-                <div class="metric-item">
-                  <div class="metric-dot warn"></div>
-                  <span class="metric-name">定着率 Rec.3</span>
-                  <span class="metric-val warn">要改善</span>
-                </div>
               </div>
             </div>
-            <div class="mini-graph">
-              <div class="mini-graph-label">月次対比推移</div>
-              <div class="mini-bars">
-                <div class="mini-bar prev" style="height:60%"></div>
-                <div class="mini-bar prev" style="height:55%"></div>
-                <div class="mini-bar prev" style="height:65%"></div>
-                <div class="mini-bar prev" style="height:60%"></div>
-                <div class="mini-bar prev" style="height:70%"></div>
-                <div class="mini-bar curr" style="height:72%"></div>
-                <div class="mini-bar curr" style="height:75%"></div>
-              </div>
-            </div>
-            <div class="sync-row">
-              <div class="sync-dot"></div>データ同期済み — 今日 08:32
+
+            <div class="sync-row" style="margin-top:6px">
+              <div class="sync-dot"></div>経営スコアに連動中
             </div>
           </div>
 
@@ -917,6 +989,47 @@
     arrow.textContent = drawer.classList.contains('open') ? '▲' : '▼';
   }
 
+  // Strategy tuner
+  function onSlider() {
+    const jisho    = parseInt(document.getElementById('sl-jisho').value);
+    const cs       = parseInt(document.getElementById('sl-cs').value);
+    const consensus= parseInt(document.getElementById('sl-consensus').value);
+    const ic       = parseInt(document.getElementById('sl-ic').value);
+
+    document.getElementById('val-jisho').textContent    = jisho;
+    document.getElementById('val-cs').textContent       = cs;
+    document.getElementById('val-consensus').textContent= consensus;
+    document.getElementById('val-ic').textContent       = ic;
+
+    // Radar: flip jisho & cs so outer edge = 自費寄り / CS重視寄り
+    const axes = [100 - jisho, 100 - cs, consensus, ic];
+    const cx = 50, cy = 50, maxR = 38;
+    const rads = [-90, 0, 90, 180].map(d => d * Math.PI / 180);
+
+    const pts = axes.map((v, i) => {
+      const r = v / 100 * maxR;
+      return [+(cx + r * Math.cos(rads[i])).toFixed(1),
+              +(cy + r * Math.sin(rads[i])).toFixed(1)];
+    });
+
+    document.getElementById('radar-polygon').setAttribute('points',
+      pts.map(p => p.join(',')).join(' '));
+    pts.forEach((p, i) => {
+      document.getElementById('rdot-' + i).setAttribute('cx', p[0]);
+      document.getElementById('rdot-' + i).setAttribute('cy', p[1]);
+    });
+
+    // Management score: self-pay & CS orientation positively affect revenue/satisfaction
+    const delta = (100 - jisho - 50) * 0.08   // 自費寄り → +
+                + (100 - cs   - 50) * 0.04   // CS重視 → +
+                + (consensus  - 50) * 0.03   // コンセンサス高 → +
+                + (ic         - 50) * 0.03;  // IC高 → +
+    const score = Math.round(Math.max(78, Math.min(97, 88 + delta)));
+    document.getElementById('mgmt-score').textContent = score;
+    document.getElementById('mgmt-ring').setAttribute(
+      'stroke-dashoffset', (263.9 * (1 - score / 100)).toFixed(1));
+  }
+
   // Loading overlay
   const subMessages = [
     'Analyzing Document Data...',
@@ -932,7 +1045,7 @@
     let msgIdx = 0;
 
     const interval = setInterval(function() {
-      width += Math.random() * 12 + 4;
+      width += Math.random() * 4 + 6;
 
       if (width >= 100) {
         width = 100;
