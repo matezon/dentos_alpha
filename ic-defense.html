@@ -85,6 +85,22 @@
     .sidebar-item:hover { background: rgba(0,200,215,.06); color: var(--text-main); }
     .sidebar-item.active { color: var(--accent); border-left-color: var(--accent); background: rgba(0,200,215,.1); }
     .sidebar-icon { width: 16px; text-align: center; font-style: normal; font-size: 14px; }
+    .sidebar-item--disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .sidebar-item--disabled::after {
+      content: '準備中';
+      font-size: 9px;
+      background: rgba(106,138,170,.18);
+      color: var(--text-muted);
+      border-radius: 3px;
+      padding: 1px 5px;
+      margin-left: auto;
+      letter-spacing: .03em;
+      white-space: nowrap;
+    }
 
     /* ===== MAIN ===== */
     .main { flex: 1; display: flex; flex-direction: column; min-width: 0; overflow-y: auto; }
@@ -319,7 +335,7 @@
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-group">
         <div class="sidebar-group-label">受付・初診</div>
-        <div class="sidebar-item" style="cursor:default;pointer-events:none">
+        <div class="sidebar-item sidebar-item--disabled">
           <i class="sidebar-icon">🔗</i>ゼロ・インテーク
         </div>
       </div>
@@ -337,19 +353,19 @@
       </div>
       <div class="sidebar-group">
         <div class="sidebar-group-label">教育・離職防止</div>
-        <div class="sidebar-item">
+        <div class="sidebar-item sidebar-item--disabled">
           <i class="sidebar-icon">🧠</i>メンタル・トレーサー
         </div>
       </div>
       <div class="sidebar-group">
         <div class="sidebar-group-label">リコール</div>
-        <div class="sidebar-item">
+        <div class="sidebar-item sidebar-item--disabled">
           <i class="sidebar-icon">📅</i><span>オート・フィラー<span style="font-size:9px;color:var(--text-muted);display:block;margin-top:1px;">予約自動補填</span></span>
         </div>
       </div>
       <div class="sidebar-group">
         <div class="sidebar-group-label">経営管理</div>
-        <div class="sidebar-item">
+        <div class="sidebar-item sidebar-item--disabled">
           <i class="sidebar-icon">💰</i>キャッシュフロー・ナビゲーター
         </div>
       </div>
