@@ -848,18 +848,18 @@
 
                 <div class="slider-item">
                   <div class="slider-header">
-                    <span class="slider-lbl-l">自費</span>
+                    <span class="slider-lbl-l">保険</span>
                     <span class="slider-val" id="val-jisho">50</span>
-                    <span class="slider-lbl-r">保険</span>
+                    <span class="slider-lbl-r">自費</span>
                   </div>
                   <input type="range" class="slider-range" id="sl-jisho" min="0" max="100" value="50" oninput="onSlider()">
                 </div>
 
                 <div class="slider-item">
                   <div class="slider-header">
-                    <span class="slider-lbl-l">CS重視</span>
+                    <span class="slider-lbl-l">効率重視</span>
                     <span class="slider-val" id="val-cs">50</span>
-                    <span class="slider-lbl-r">効率重視</span>
+                    <span class="slider-lbl-r">CS重視</span>
                   </div>
                   <input type="range" class="slider-range" id="sl-cs" min="0" max="100" value="50" oninput="onSlider()">
                 </div>
@@ -1001,8 +1001,7 @@
     document.getElementById('val-consensus').textContent= consensus;
     document.getElementById('val-ic').textContent       = ic;
 
-    // Radar: flip jisho & cs so outer edge = 自費寄り / CS重視寄り
-    const axes = [100 - jisho, 100 - cs, consensus, ic];
+    const axes = [jisho, cs, consensus, ic];
     const cx = 50, cy = 50, maxR = 38;
     const rads = [-90, 0, 90, 180].map(d => d * Math.PI / 180);
 
@@ -1019,9 +1018,8 @@
       document.getElementById('rdot-' + i).setAttribute('cy', p[1]);
     });
 
-    // Management score: self-pay & CS orientation positively affect revenue/satisfaction
-    const delta = (100 - jisho - 50) * 0.08   // 自費寄り → +
-                + (100 - cs   - 50) * 0.04   // CS重視 → +
+    const delta = (jisho    - 50) * 0.08   // 自費寄り → +
+                + (cs      - 50) * 0.04   // CS重視 → +
                 + (consensus  - 50) * 0.03   // コンセンサス高 → +
                 + (ic         - 50) * 0.03;  // IC高 → +
     const score = Math.round(Math.max(78, Math.min(97, 88 + delta)));
